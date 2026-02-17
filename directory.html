@@ -130,7 +130,7 @@
         /* V1: Warm photo background with overlay */
         .hero.hero-v1 {
             background: linear-gradient(135deg, rgba(107,91,123,0.88) 0%, rgba(45,36,56,0.82) 100%),
-                url('https://images.pexels.com/photos/7551667/pexels-photo-7551667.jpeg?auto=compress&cs=tinysrgb&w=1400') center 30%/cover;
+                url('https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=1400&q=80') center/cover;
         }
         .hero.hero-v1 h1,
         .hero.hero-v1 .hero-stat .number { color: #fff; }
@@ -138,33 +138,6 @@
         .hero.hero-v1 .hero-stat .label { color: rgba(255,255,255,0.8); }
         .hero.hero-v1 .hero-badge { background: rgba(255,255,255,0.2); color: #fff; }
         .hero.hero-v1 .hero-search input { border-color: rgba(255,255,255,0.3); }
-
-        /* Hero decorative side photos */
-        .hero-side-photo {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 280px;
-            height: 360px;
-            object-fit: cover;
-            opacity: 0.12;
-            border-radius: 16px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero-side-photo.left {
-            left: 32px;
-        }
-
-        .hero-side-photo.right {
-            right: 32px;
-        }
-
-        .hero .hero-inner {
-            position: relative;
-            z-index: 2;
-        }
 
         /* V2: Animated gradient + faded photo */
         @keyframes gradientShift {
@@ -176,7 +149,7 @@
         }
 
         .hero.hero-v2 {
-            background: linear-gradient(135deg, var(--green-50) 0%, var(--warm-100) 100%);
+            background: url('https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=1400&q=80') center/cover no-repeat;
         }
         .hero.hero-v2::before {
             content: '';
@@ -1423,7 +1396,6 @@
             .hero p { font-size: 16px; }
             .hero-stats { gap: 24px; }
             .hero-stat .number { font-size: 22px; }
-            .hero-side-photo { display: none; }
             .cards { flex-direction: column; }
             .cards-col { flex: unset; }
             .filters-inner { flex-direction: column; align-items: stretch; }
@@ -1458,9 +1430,6 @@
 
 <!-- Hero Section -->
 <section class="hero" id="heroSection">
-    <!-- Decorative side photos -->
-    <img class="hero-side-photo left" src="https://images.pexels.com/photos/7236499/pexels-photo-7236499.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy">
-    <img class="hero-side-photo right" src="https://images.pexels.com/photos/8631628/pexels-photo-8631628.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy">
     <!-- V3 illustration (hidden by default) -->
     <svg class="hero-illustration" viewBox="0 0 280 240" fill="none">
         <rect x="60" y="80" width="160" height="120" rx="8" fill="currentColor" opacity="0.15"/>
@@ -1501,7 +1470,7 @@
             </div>
             <p class="hero-disclaimer" style="font-size:12px;color:var(--text-muted);margin-top:24px">Preise: Eigenanteil laut AOK Pflegesatzvereinbarung (PG 2&ndash;5, ohne Investitionskosten)</p>
         </div>
-        <img class="hero-image" src="https://images.pexels.com/photos/7551667/pexels-photo-7551667.jpeg?auto=compress&cs=tinysrgb&w=840" alt="Seniorenpflege" style="display:none">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=840&q=80" alt="Seniorenpflege" style="display:none">
     </div>
 </section>
 
@@ -2253,6 +2222,24 @@ function submitEnquiry() {
 
     trackEvent('enquiry_submit', data);
 
+    // Send lead via email
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            access_key: 'c6c12b62-bc6e-4d63-9042-27f36bda5f46',
+            subject: '🏠 Neue Anfrage: ' + data.home_name,
+            from_name: 'OmasOase',
+            name: name,
+            email: email,
+            phone: data.user_phone || 'Nicht angegeben',
+            pflegegrad: data.pflegegrad,
+            pflegeart: data.care_type,
+            pflegeheim: data.home_name,
+            nachricht: data.message || 'Keine Nachricht',
+        })
+    }).catch(() => {});
+
     document.getElementById('enquiryForm').style.display = 'none';
     document.getElementById('enquirySuccess').style.display = '';
 
@@ -2264,15 +2251,20 @@ function submitEnquiry() {
 
 // Analytics
 const analytics = [];
+const PII_FIELDS = ['name','email','phone','user_name','user_email','user_phone','notes'];
 function trackEvent(event, data = {}) {
     const entry = { event, ...data, time: new Date().toISOString(), url: location.href };
     analytics.push(entry);
     const stored = JSON.parse(localStorage.getItem('omasoase_analytics') || '[]');
     stored.push(entry);
     localStorage.setItem('omasoase_analytics', JSON.stringify(stored));
-    // Send to GA4
+    // Send to GA4 — strip PII (GDPR + Google ToS)
     if (typeof gtag === 'function') {
-        gtag('event', event, data);
+        const safe = {};
+        for (const [k, v] of Object.entries(data)) {
+            if (!PII_FIELDS.includes(k)) safe[k] = v;
+        }
+        gtag('event', event, safe);
     }
 }
 
@@ -2389,6 +2381,27 @@ function submitQuiz() {
     localStorage.setItem('omasoase_quiz_leads', JSON.stringify(leads));
 
     trackEvent('quiz_submit', quizAnswers);
+
+    // Send lead via email
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            access_key: 'c6c12b62-bc6e-4d63-9042-27f36bda5f46',
+            subject: '🏠 Neue Beratungsanfrage (Quiz)',
+            from_name: 'OmasOase',
+            name: name,
+            email: email,
+            phone: quizAnswers.phone || 'Nicht angegeben',
+            fuer_wen: quizAnswers.step1 || '',
+            pflegegrad: quizAnswers.step2 || '',
+            pflegeart: quizAnswers.step3 || '',
+            dringlichkeit: quizAnswers.step4 || '',
+            budget: quizAnswers.step5 || '',
+            notizen: quizAnswers.notes || 'Keine',
+        })
+    }).catch(() => {});
+
     showQuizStep('done');
 }
 
