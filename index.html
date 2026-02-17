@@ -127,19 +127,7 @@
             overflow: hidden;
         }
 
-        /* V1: Warm photo background with overlay */
-        .hero.hero-v1 {
-            background: linear-gradient(135deg, rgba(107,91,123,0.88) 0%, rgba(45,36,56,0.82) 100%),
-                url('https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=1400&q=80') center/cover;
-        }
-        .hero.hero-v1 h1,
-        .hero.hero-v1 .hero-stat .number { color: #fff; }
-        .hero.hero-v1 p,
-        .hero.hero-v1 .hero-stat .label { color: rgba(255,255,255,0.8); }
-        .hero.hero-v1 .hero-badge { background: rgba(255,255,255,0.2); color: #fff; }
-        .hero.hero-v1 .hero-search input { border-color: rgba(255,255,255,0.3); }
-
-        /* V2: Animated gradient + faded photo */
+        /* Animated gradient hero */
         @keyframes gradientShift {
             0%   { background-position: 0% 50%; }
             25%  { background-position: 100% 50%; }
@@ -149,14 +137,7 @@
         }
 
         .hero.hero-v2 {
-            background: url('https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=1400&q=80') center/cover no-repeat;
-        }
-        .hero.hero-v2::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: linear-gradient(135deg, rgba(237,224,245,0.93), rgba(245,238,249,0.91), rgba(250,242,236,0.89), rgba(249,232,224,0.91), rgba(232,218,245,0.93), rgba(240,228,248,0.91), rgba(237,224,245,0.93));
+            background: linear-gradient(135deg, #ede0f5, #f5eef9, #faf2ec, #f9e8e0, #e8daf5, #f0e4f8, #ede0f5);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
         }
@@ -165,79 +146,29 @@
             z-index: 2;
         }
 
-        /* V3: SVG illustration beside text */
-        .hero.hero-v3 {
-            background: linear-gradient(135deg, var(--green-50) 0%, var(--warm-100) 100%);
-        }
-        .hero.hero-v3 .hero-illustration {
-            display: block;
+        /* Hero side photos (slideshow) */
+        .hero-side-photo {
             position: absolute;
-            right: 5%;
-            bottom: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             width: 280px;
-            height: 240px;
-            opacity: 0.2;
-        }
-
-        /* V4: Split hero - text left, image right */
-        .hero.hero-v4 {
-            text-align: left;
-            padding: 60px 32px;
-        }
-        .hero.hero-v4 .hero-inner {
-            max-width: 1320px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 48px;
-        }
-        .hero.hero-v4 .hero-content {
-            flex: 1;
-        }
-        .hero.hero-v4 .hero-image {
-            flex-shrink: 0;
-            width: 420px;
-            height: 320px;
-            border-radius: 16px;
+            height: 360px;
             object-fit: cover;
-            box-shadow: 0 8px 30px rgba(107,91,123,0.2);
+            opacity: 0;
+            border-radius: 16px;
+            pointer-events: none;
+            z-index: 3;
+            filter: grayscale(20%);
+            transition: opacity 2s ease;
         }
-        .hero.hero-v4 h1 { margin: 0 0 16px; }
-        .hero.hero-v4 p { margin: 0 0 36px; }
-        .hero.hero-v4 .hero-search { margin: 0; }
-        .hero.hero-v4 .hero-stats { justify-content: flex-start; }
-        .hero.hero-v4 .hero-badge { margin-bottom: 20px; }
+        .hero-side-photo.visible { opacity: 0.15; }
+        .hero-side-photo.left { left: 32px; }
+        .hero-side-photo.right { right: 32px; }
+        @media (max-width: 1200px) {
+            .hero-side-photo { display: none; }
+        }
 
-        /* Hero switcher (temp) */
-        .hero-switcher {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 9999;
-            background: #fff;
-            padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            font-family: 'Inter', sans-serif;
-        }
-        .hero-switcher .label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 2px; }
-        .hero-sw-btn {
-            padding: 8px 12px;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            background: #f5f5f5;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 500;
-            transition: all 0.2s;
-            text-align: left;
-        }
-        .hero-sw-btn:hover { background: #eee; }
-        .hero-sw-btn.active { border-color: #6b5b7b; background: #fff; }
+
 
         .hero-badge {
             display: inline-block;
@@ -1429,19 +1360,10 @@
 </nav>
 
 <!-- Hero Section -->
-<section class="hero" id="heroSection">
-    <!-- V3 illustration (hidden by default) -->
-    <svg class="hero-illustration" viewBox="0 0 280 240" fill="none">
-        <rect x="60" y="80" width="160" height="120" rx="8" fill="currentColor" opacity="0.15"/>
-        <polygon points="140,30 40,100 240,100" fill="currentColor" opacity="0.12"/>
-        <rect x="110" y="140" width="60" height="60" rx="4" fill="currentColor" opacity="0.1"/>
-        <circle cx="140" cy="65" r="8" fill="currentColor" opacity="0.15"/>
-        <rect x="80" y="110" width="25" height="25" rx="3" fill="currentColor" opacity="0.1"/>
-        <rect x="175" y="110" width="25" height="25" rx="3" fill="currentColor" opacity="0.1"/>
-        <circle cx="50" cy="180" r="30" fill="currentColor" opacity="0.06"/>
-        <circle cx="230" cy="160" r="20" fill="currentColor" opacity="0.06"/>
-    </svg>
-    <!-- V4 wrapper (inner gets used for split layout) -->
+<section class="hero hero-v2" id="heroSection">
+    <!-- Side photos (slideshow from care home data) -->
+    <img class="hero-side-photo left" id="heroPhotoLeft" src="" alt="" loading="lazy">
+    <img class="hero-side-photo right" id="heroPhotoRight" src="" alt="" loading="lazy">
     <div class="hero-inner" id="heroInner">
         <div class="hero-content">
             <div class="hero-badge">Region Stuttgart &middot; 246 Einrichtungen</div>
@@ -1470,7 +1392,6 @@
             </div>
             <p class="hero-disclaimer" style="font-size:12px;color:var(--text-muted);margin-top:24px">Preise: Eigenanteil laut AOK Pflegesatzvereinbarung (PG 2&ndash;5, ohne Investitionskosten)</p>
         </div>
-        <img class="hero-image" src="https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=840&q=80" alt="Seniorenpflege" style="display:none">
     </div>
 </section>
 
@@ -2464,51 +2385,67 @@ fetch('data/stuttgart_final.csv')
         populateCityFilter();
         updateHeroStats();
         render();
+        startHeroSlideshow();
     });
-</script>
 
-<!-- Hero Switcher (temporary) -->
-<div class="hero-switcher">
-    <div class="label">Hero Style</div>
-    <button class="hero-sw-btn" onclick="setHero('default')" data-hero="default">Current</button>
-    <button class="hero-sw-btn" onclick="setHero('v1')" data-hero="v1">Photo BG</button>
-    <button class="hero-sw-btn" onclick="setHero('v2')" data-hero="v2">Gradient</button>
-    <button class="hero-sw-btn" onclick="setHero('v3')" data-hero="v3">Illustration</button>
-    <button class="hero-sw-btn" onclick="setHero('v4')" data-hero="v4">Split Photo</button>
-</div>
-
-<script>
-function setHero(variant) {
-    const hero = document.getElementById('heroSection');
-    const img = hero.querySelector('.hero-image');
-    const illust = hero.querySelector('.hero-illustration');
-    const disclaimer = hero.querySelector('.hero-disclaimer');
-
-    // Reset
-    hero.className = 'hero';
-    if (img) img.style.display = 'none';
-    if (illust) illust.style.display = 'none';
-    if (disclaimer) disclaimer.style.color = 'var(--text-muted)';
-
-    if (variant === 'v1') {
-        hero.classList.add('hero-v1');
-        if (disclaimer) disclaimer.style.color = 'rgba(255,255,255,0.5)';
-    } else if (variant === 'v2') {
-        hero.classList.add('hero-v2');
-    } else if (variant === 'v3') {
-        hero.classList.add('hero-v3');
-        if (illust) illust.style.display = 'block';
-    } else if (variant === 'v4') {
-        hero.classList.add('hero-v4');
-        if (img) img.style.display = 'block';
-    }
-
-    document.querySelectorAll('.hero-sw-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.hero === variant);
-    });
+function startHeroSlideshow() {
+    // Try loading people-only classification first
+    fetch('data/photo_classification.json')
+        .then(r => r.ok ? r.json() : null)
+        .then(classification => {
+            let allPhotos;
+            if (classification && classification.people_photos && classification.people_photos.length >= 2) {
+                allPhotos = classification.people_photos;
+                console.log(`Hero slideshow: using ${allPhotos.length} people-only photos`);
+            } else {
+                // Fallback: use all photos
+                allPhotos = [];
+                facilities.forEach(f => {
+                    const urls = (f.photo_urls || '').split(';').map(u => u.trim()).filter(u => u.startsWith('http'));
+                    allPhotos.push(...urls);
+                });
+                console.log(`Hero slideshow: no classification found, using all ${allPhotos.length} photos`);
+            }
+            if (allPhotos.length < 2) return;
+            // Shuffle
+            for (let i = allPhotos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
+            }
+            runSlideshow(allPhotos);
+        })
+        .catch(() => {
+            // Fetch failed, use all photos
+            const allPhotos = [];
+            facilities.forEach(f => {
+                const urls = (f.photo_urls || '').split(';').map(u => u.trim()).filter(u => u.startsWith('http'));
+                allPhotos.push(...urls);
+            });
+            if (allPhotos.length >= 2) runSlideshow(allPhotos);
+        });
 }
-setHero('default');
+
+function runSlideshow(allPhotos) {
+    const leftEl = document.getElementById('heroPhotoLeft');
+    const rightEl = document.getElementById('heroPhotoRight');
+    if (!leftEl || !rightEl) return;
+    let idx = 0;
+    function showNext() {
+        leftEl.classList.remove('visible');
+        rightEl.classList.remove('visible');
+        setTimeout(() => {
+            leftEl.src = allPhotos[idx % allPhotos.length];
+            rightEl.src = allPhotos[(idx + 1) % allPhotos.length];
+            idx = (idx + 2) % allPhotos.length;
+            leftEl.onload = () => leftEl.classList.add('visible');
+            rightEl.onload = () => rightEl.classList.add('visible');
+        }, 2000);
+    }
+    showNext();
+    setInterval(showNext, 30000);
+}
 </script>
+
 
 </body>
 </html>
