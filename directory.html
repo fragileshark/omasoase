@@ -1362,8 +1362,8 @@
 <!-- Hero Section -->
 <section class="hero hero-v2" id="heroSection">
     <!-- Side photos (slideshow from care home data) -->
-    <img class="hero-side-photo left" id="heroPhotoLeft" src="" alt="" loading="lazy">
-    <img class="hero-side-photo right" id="heroPhotoRight" src="" alt="" loading="lazy">
+    <img class="hero-side-photo left" id="heroPhotoLeft" src="" alt="">
+    <img class="hero-side-photo right" id="heroPhotoRight" src="" alt="">
     <div class="hero-inner" id="heroInner">
         <div class="hero-content">
             <div class="hero-badge">Region Stuttgart &middot; 246 Einrichtungen</div>
@@ -2435,16 +2435,28 @@ function runSlideshow(allPhotos) {
     const rightEl = document.getElementById('heroPhotoRight');
     if (!leftEl || !rightEl) return;
     let idx = 0;
+    let firstLoad = true;
     function showNext() {
-        leftEl.classList.remove('visible');
-        rightEl.classList.remove('visible');
-        setTimeout(() => {
-            leftEl.src = allPhotos[idx % allPhotos.length];
-            rightEl.src = allPhotos[(idx + 1) % allPhotos.length];
-            idx = (idx + 2) % allPhotos.length;
+        if (firstLoad) {
+            // First pair: set src immediately, fade in on load
+            leftEl.src = allPhotos[0];
+            rightEl.src = allPhotos[1];
+            idx = 2;
             leftEl.onload = () => leftEl.classList.add('visible');
             rightEl.onload = () => rightEl.classList.add('visible');
-        }, 2000);
+            firstLoad = false;
+        } else {
+            // Subsequent: fade out, swap, fade in
+            leftEl.classList.remove('visible');
+            rightEl.classList.remove('visible');
+            setTimeout(() => {
+                leftEl.src = allPhotos[idx % allPhotos.length];
+                rightEl.src = allPhotos[(idx + 1) % allPhotos.length];
+                idx = (idx + 2) % allPhotos.length;
+                leftEl.onload = () => leftEl.classList.add('visible');
+                rightEl.onload = () => rightEl.classList.add('visible');
+            }, 2000);
+        }
     }
     showNext();
     setInterval(showNext, 30000);
