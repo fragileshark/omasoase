@@ -1,4 +1,8 @@
 .env
 __pycache__/
-data/
 *.pyc
+data/stuttgart_carehomes.json
+data/google_enrichment.json
+data/website_extractions.json
+data/stuttgart_carehomes.csv
+data/stuttgart_enriched.csv
