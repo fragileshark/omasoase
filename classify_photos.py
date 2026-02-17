@@ -36,7 +36,7 @@ for batch_start in range(0, len(all_urls), BATCH_SIZE):
 
     content.append({
         "type": "text",
-        "text": "For each image above, answer ONLY with the image number and YES if it shows people (residents, staff, visitors) or NO if it only shows rooms/buildings/furniture/bathrooms/gardens without people. Format: 1:YES 2:NO etc."
+        "text": "For each image above, answer ONLY with the image number and YES or NO. Say YES only if people are a PROMINENT subject — clearly visible faces, groups interacting, or caregiving scenes. Say NO for building exteriors, rooms, furniture, gardens, hallways, or any photo where people are tiny/background figures. When in doubt, say NO. Format: 1:YES 2:NO etc."
     })
 
     try:
