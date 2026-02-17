@@ -1631,6 +1631,7 @@
             <h2>Wie k&ouml;nnen wir Sie erreichen?</h2>
             <div class="step-desc">Wir senden Ihnen eine pers&ouml;nliche Empfehlung &mdash; kostenlos und unverbindlich.</div>
             <div class="quiz-contact-form">
+                <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" id="quizWebsite" tabindex="-1" autocomplete="off"></div>
                 <label>Ihr Name *</label>
                 <input type="text" id="quizName" placeholder="Max Mustermann">
                 <label>E-Mail *</label>
@@ -1677,6 +1678,7 @@
             <div class="subtitle" id="enquirySubtitle"></div>
             <input type="hidden" id="enquiryHomeId">
             <input type="hidden" id="enquiryHomeName">
+            <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" id="enqWebsite" tabindex="-1" autocomplete="off"></div>
             <div class="form-group">
                 <label>Ihr Name *</label>
                 <input type="text" id="enqName" placeholder="Max Mustermann" required>
@@ -2123,6 +2125,7 @@ function closeEnquiry() {
 }
 
 function submitEnquiry() {
+    if (document.getElementById('enqWebsite').value) return;
     const name = document.getElementById('enqName').value.trim();
     const email = document.getElementById('enqEmail').value.trim();
     if (!name || !email) {
@@ -2289,6 +2292,7 @@ function quizBack(currentStep) {
 }
 
 function submitQuiz() {
+    if (document.getElementById('quizWebsite').value) return;
     const name = document.getElementById('quizName').value.trim();
     const email = document.getElementById('quizEmail').value.trim();
     if (!name || !email) {
