@@ -1,0 +1,2470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmasOase — Pflegeheim finden in Stuttgart | Preise, Bewertungen & Vergleich</title>
+    <meta name="description" content="Finden und vergleichen Sie 246 Pflegeheime in der Region Stuttgart. Echte Preise, Google-Bewertungen und detaillierte Informationen. Kostenlos und unabh&auml;ngig.">
+    <meta name="keywords" content="Pflegeheim Stuttgart, Altenheim Stuttgart, Pflegeheim Kosten, Eigenanteil, Kurzzeitpflege Stuttgart, Pflegeplatz finden">
+    <meta property="og:title" content="OmasOase — Pflegeheim finden in Stuttgart">
+    <meta property="og:description" content="246 Pflegeheime im Vergleich. Preise, Bewertungen, Verf&uuml;gbarkeit.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://omasoase.de">
+    <link rel="canonical" href="https://omasoase.de">
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FX9ZFMQSEM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FX9ZFMQSEM');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green-700: #6b5b7b;
+            --green-600: #8471a0;
+            --green-500: #a18dbe;
+            --green-100: #ede8f5;
+            --green-50: #f7f4fb;
+            --warm-50: #f8f5fa;
+            --warm-100: #f0ecf4;
+            --warm-200: #e2dae9;
+            --text-primary: #2d2438;
+            --text-secondary: #605670;
+            --text-muted: #938a9e;
+            --border: #ddd6e5;
+            --border-light: #eae5f0;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(107,91,123,0.06);
+            --shadow-md: 0 4px 16px rgba(107,91,123,0.08);
+            --shadow-lg: 0 8px 30px rgba(107,91,123,0.12);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--warm-50);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ---- Navigation ---- */
+        .nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0 32px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(255,255,255,0.95);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo span {
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+            color: var(--text-primary);
+        }
+
+        .nav-logo strong {
+            font-weight: 700;
+            color: var(--green-700);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--green-700); }
+
+        .nav-cta {
+            background: var(--green-700) !important;
+            color: var(--white) !important;
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: var(--green-600) !important; }
+
+        /* ---- Hero Section ---- */
+        .hero {
+            background: linear-gradient(135deg, var(--green-50) 0%, var(--warm-100) 100%);
+            padding: 72px 32px 64px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* V1: Warm photo background with overlay */
+        .hero.hero-v1 {
+            background: linear-gradient(135deg, rgba(107,91,123,0.88) 0%, rgba(45,36,56,0.82) 100%),
+                url('https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=1400&q=80') center/cover;
+        }
+        .hero.hero-v1 h1,
+        .hero.hero-v1 .hero-stat .number { color: #fff; }
+        .hero.hero-v1 p,
+        .hero.hero-v1 .hero-stat .label { color: rgba(255,255,255,0.8); }
+        .hero.hero-v1 .hero-badge { background: rgba(255,255,255,0.2); color: #fff; }
+        .hero.hero-v1 .hero-search input { border-color: rgba(255,255,255,0.3); }
+
+        /* V2: Animated gradient + faded photo */
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            25%  { background-position: 100% 50%; }
+            50%  { background-position: 100% 0%; }
+            75%  { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero.hero-v2 {
+            background: url('https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=1400&q=80') center/cover no-repeat;
+        }
+        .hero.hero-v2::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(237,224,245,0.93), rgba(245,238,249,0.91), rgba(250,242,236,0.89), rgba(249,232,224,0.91), rgba(232,218,245,0.93), rgba(240,228,248,0.91), rgba(237,224,245,0.93));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        .hero.hero-v2 .hero-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* V3: SVG illustration beside text */
+        .hero.hero-v3 {
+            background: linear-gradient(135deg, var(--green-50) 0%, var(--warm-100) 100%);
+        }
+        .hero.hero-v3 .hero-illustration {
+            display: block;
+            position: absolute;
+            right: 5%;
+            bottom: 20px;
+            width: 280px;
+            height: 240px;
+            opacity: 0.2;
+        }
+
+        /* V4: Split hero - text left, image right */
+        .hero.hero-v4 {
+            text-align: left;
+            padding: 60px 32px;
+        }
+        .hero.hero-v4 .hero-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+        .hero.hero-v4 .hero-content {
+            flex: 1;
+        }
+        .hero.hero-v4 .hero-image {
+            flex-shrink: 0;
+            width: 420px;
+            height: 320px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 8px 30px rgba(107,91,123,0.2);
+        }
+        .hero.hero-v4 h1 { margin: 0 0 16px; }
+        .hero.hero-v4 p { margin: 0 0 36px; }
+        .hero.hero-v4 .hero-search { margin: 0; }
+        .hero.hero-v4 .hero-stats { justify-content: flex-start; }
+        .hero.hero-v4 .hero-badge { margin-bottom: 20px; }
+
+        /* Hero switcher (temp) */
+        .hero-switcher {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 9999;
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-switcher .label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 2px; }
+        .hero-sw-btn {
+            padding: 8px 12px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background: #f5f5f5;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .hero-sw-btn:hover { background: #eee; }
+        .hero-sw-btn.active { border-color: #6b5b7b; background: #fff; }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--green-100);
+            color: var(--green-700);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            color: var(--text-primary);
+            max-width: 700px;
+            margin: 0 auto 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+
+        .hero-search {
+            max-width: 520px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-search input {
+            width: 100%;
+            padding: 16px 24px 16px 48px;
+            font-size: 16px;
+            border: 2px solid var(--border);
+            border-radius: 100px;
+            background: var(--white);
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .hero-search input:focus {
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 4px rgba(82,183,136,0.15);
+        }
+
+        .hero-search svg {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--green-700);
+        }
+
+        .hero-stat .label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ---- Filters ---- */
+        .filters-section {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 32px;
+        }
+
+        .filters-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            position: relative;
+        }
+
+        .filter-group label {
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--white);
+            padding: 0 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filters-inner select, .filters-inner input[type="number"] {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--text-primary);
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .filters-inner select:focus, .filters-inner input[type="number"]:focus {
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(82,183,136,0.12);
+        }
+
+        .filters-inner input[type="number"] { width: 140px; }
+
+        .sort-pills {
+            display: flex;
+            gap: 4px;
+            margin-left: auto;
+            background: var(--warm-50);
+            padding: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        .sort-btn {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: inherit;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sort-btn:hover { color: var(--text-primary); background: var(--white); }
+
+        .sort-btn.active {
+            background: var(--white);
+            color: var(--green-700);
+            box-shadow: var(--shadow-sm);
+            font-weight: 600;
+        }
+
+        /* ---- Stats Bar ---- */
+        .stats-bar {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 16px 32px 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ---- Cards Grid ---- */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 8px 32px 48px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 16px;
+        }
+
+        .cards-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-light);
+            transition: box-shadow 0.25s, border-color 0.25s;
+        }
+
+        .card-top {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 4px;
+        }
+
+        .card-top-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-top-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+            min-width: 110px;
+        }
+
+        .card-photo {
+            width: 100%;
+            height: 52px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .card-photo:hover { opacity: 0.85; }
+
+        .photo-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .photo-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-body {
+            padding: 20px 24px 24px;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border);
+        }
+
+        .card-header {
+            display: none;
+        }
+
+        .card-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .card-price {
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            letter-spacing: -0.3px;
+        }
+
+        .card-price.default {
+            background: var(--green-50);
+            color: var(--green-700);
+        }
+
+        .card-price.expensive {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .card-price.cheap {
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .card-address {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .card-address .addr-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-address:hover {
+            color: var(--green-700);
+            text-decoration: underline;
+        }
+
+        .card-address .maps-hint {
+            font-size: 11px;
+            color: var(--green-700);
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .card-address:hover .maps-hint {
+            opacity: 1;
+        }
+
+        .card-address svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag.default { background: var(--warm-100); color: var(--text-secondary); }
+        .tag.kurz { background: var(--green-100); color: var(--green-700); }
+        .tag.rating { background: #faf5ff; color: #6b21a8; }
+        .tag.rating-high { background: #f0e8f5; color: #5b2178; }
+        .tag.rating-low { background: #fef2f2; color: #991b1b; }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin: 16px 0;
+            background: var(--border-light);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .price-cell {
+            text-align: center;
+            padding: 10px 8px;
+            background: var(--warm-50);
+        }
+
+        .price-cell .label {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-cell .value {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .toggle-details {
+            background: none;
+            border: none;
+            color: var(--green-600);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
+            padding: 4px 0;
+            margin-top: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toggle-details:hover { color: var(--green-700); }
+
+        .toggle-details::after {
+            content: '\2193';
+            font-size: 12px;
+        }
+
+        .toggle-details.open::after {
+            content: '\2191';
+        }
+
+        .card-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+            display: none;
+            background: var(--warm-50);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+        }
+
+        .card-details.open { display: block; }
+
+        .detail-section {
+            margin-bottom: 16px;
+        }
+
+        .detail-section:last-child { margin-bottom: 0; }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .detail-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .detail-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-list li {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 3px 0;
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .detail-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--green-500);
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+        }
+
+        .staff-cell {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 6px 10px;
+            text-align: center;
+        }
+
+        .staff-cell .pg { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+        .staff-cell .ratio { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+        .card-actions {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-links a {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--green-700);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .action-links a:hover {
+            background: var(--green-700);
+            color: var(--white);
+            border-color: var(--green-700);
+        }
+
+        .action-link {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--green-700);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .action-link:hover {
+            background: var(--green-700);
+            color: var(--white);
+            border-color: var(--green-700);
+        }
+
+        .anfrage-btn {
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            background: var(--green-700);
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .anfrage-btn:hover { background: var(--green-600); }
+
+        /* ---- Compare Bar ---- */
+        .compare-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--text-primary);
+            color: var(--white);
+            padding: 14px 32px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 200;
+            border-top: 2px solid var(--green-500);
+        }
+
+        .compare-bar.active { display: flex; }
+
+        .compare-bar span { font-weight: 500; font-size: 14px; }
+
+        .compare-bar button {
+            background: var(--green-600);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .compare-bar button:hover { background: var(--green-500); }
+
+        .compare-bar button:first-child {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* ---- Modals ---- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26,46,26,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 95vw;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .compare-table {
+            border-collapse: collapse;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--warm-50);
+            font-weight: 600;
+            position: sticky;
+            left: 0;
+            min-width: 140px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .compare-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border-light);
+            min-width: 200px;
+            vertical-align: top;
+        }
+
+        /* ---- Enquiry Modal ---- */
+        .enquiry-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26,46,26,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .enquiry-overlay.active { display: flex; }
+
+        .enquiry-modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 36px;
+            max-width: 480px;
+            width: 90vw;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .enquiry-modal h2 {
+            font-size: 20px;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .enquiry-modal .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .enquiry-modal .form-group {
+            margin-bottom: 16px;
+        }
+
+        .enquiry-modal label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+
+        .enquiry-modal input, .enquiry-modal textarea, .enquiry-modal select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .enquiry-modal input:focus, .enquiry-modal textarea:focus, .enquiry-modal select:focus {
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(82,183,136,0.12);
+        }
+
+        .enquiry-modal textarea { resize: vertical; min-height: 80px; }
+
+        .enquiry-modal .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--green-700);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .enquiry-modal .submit-btn:hover { background: var(--green-600); }
+
+        .enquiry-modal .cancel-btn {
+            width: 100%;
+            padding: 12px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 8px;
+            color: var(--text-secondary);
+            transition: background 0.2s;
+        }
+
+        .enquiry-modal .cancel-btn:hover { background: var(--warm-50); }
+
+        .success-msg {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-msg .check {
+            width: 56px;
+            height: 56px;
+            background: var(--green-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .success-msg .check svg {
+            width: 28px;
+            height: 28px;
+            color: var(--green-700);
+        }
+
+        .success-msg h2 { color: var(--green-700); margin-bottom: 8px; }
+
+        /* ---- Quiz ---- */
+        .quiz-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 500;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .quiz-overlay.active { display: flex; }
+
+        .quiz-header {
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-header .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--green-700);
+        }
+
+        .quiz-close {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .quiz-progress {
+            height: 4px;
+            background: var(--border-light);
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: var(--green-500);
+            transition: width 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .quiz-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+        }
+
+        .quiz-step {
+            max-width: 560px;
+            width: 100%;
+            display: none;
+            animation: quizFadeIn 0.3s ease;
+        }
+
+        .quiz-step.active { display: block; }
+
+        @keyframes quizFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-step .step-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--green-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .quiz-step h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .quiz-step .step-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 16px 20px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.15s;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--green-500);
+            background: var(--green-50);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--green-700);
+            background: var(--green-50);
+        }
+
+        .quiz-option .opt-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .quiz-option .opt-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+            gap: 12px;
+        }
+
+        .quiz-back {
+            padding: 12px 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .quiz-next {
+            padding: 12px 32px;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--green-700);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            margin-left: auto;
+            transition: background 0.2s;
+        }
+
+        .quiz-next:hover { background: var(--green-600); }
+        .quiz-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .quiz-contact-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        .quiz-contact-form label:first-child { margin-top: 0; }
+
+        .quiz-contact-form input, .quiz-contact-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .quiz-contact-form input:focus, .quiz-contact-form textarea:focus {
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(82,183,136,0.12);
+        }
+
+        .quiz-contact-form textarea { resize: vertical; min-height: 80px; }
+
+        .quiz-success {
+            text-align: center;
+            max-width: 480px;
+        }
+
+        .quiz-success .check-circle {
+            width: 72px;
+            height: 72px;
+            background: var(--green-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .quiz-success .check-circle svg {
+            width: 36px;
+            height: 36px;
+            color: var(--green-700);
+        }
+
+        .quiz-success h2 {
+            font-size: 28px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .quiz-success p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-options { grid-template-columns: 1fr; }
+            .quiz-step h2 { font-size: 22px; }
+        }
+
+        /* ---- Beratung Banner ---- */
+        .beratung-banner {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 2px solid var(--green-500);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            padding: 16px 32px;
+            z-index: 190;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: bottom 0.4s ease;
+        }
+
+        .beratung-banner.visible { bottom: 0; }
+        .beratung-banner.dismissed { display: none; }
+
+        .beratung-banner-text {
+            flex: 1;
+        }
+
+        .beratung-banner-text strong {
+            font-size: 15px;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .beratung-banner-text span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .beratung-banner-cta {
+            padding: 12px 28px;
+            background: var(--green-700);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .beratung-banner-cta:hover { background: var(--green-600); }
+
+        .beratung-banner-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px 8px;
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .beratung-banner { flex-wrap: wrap; padding: 14px 16px; }
+            .beratung-banner-cta { width: 100%; text-align: center; }
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            background: var(--text-primary);
+            color: rgba(255,255,255,0.7);
+            padding: 48px 32px;
+            margin-top: 64px;
+        }
+
+        .footer-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            margin-top: 8px;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-links h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            display: block;
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--white); }
+
+        .footer-bottom {
+            max-width: 1320px;
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 768px) {
+            .hero { padding: 48px 20px 40px; }
+            .hero h1 { font-size: 30px; }
+            .hero p { font-size: 16px; }
+            .hero-stats { gap: 24px; }
+            .hero-stat .number { font-size: 22px; }
+            .cards { flex-direction: column; }
+            .cards-col { flex: unset; }
+            .filters-inner { flex-direction: column; align-items: stretch; }
+            .sort-pills { margin-left: 0; overflow-x: auto; }
+            .nav { padding: 0 16px; }
+            .nav-links { display: none; }
+            .container { padding: 8px 16px 48px; }
+            .stats-bar { padding: 12px 16px 4px; }
+            .filters-section { padding: 12px 16px; }
+            .footer-inner { flex-direction: column; }
+            .card-actions { flex-wrap: wrap; }
+            .anfrage-btn { width: 100%; text-align: center; margin-top: 4px; }
+            .card-name { font-size: 16px; }
+            .card-price { font-size: 12px; padding: 4px 10px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+    <a href="#" class="nav-logo">
+        <span>Omas<strong>Oase</strong></span>
+    </a>
+    <div class="nav-links">
+        <a href="#directory">Verzeichnis</a>
+        <a href="mailto:info@omasoase.de">Kontakt</a>
+        <a href="#directory" class="nav-cta">Pflegeheim finden</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="heroSection">
+    <!-- V3 illustration (hidden by default) -->
+    <svg class="hero-illustration" viewBox="0 0 280 240" fill="none">
+        <rect x="60" y="80" width="160" height="120" rx="8" fill="currentColor" opacity="0.15"/>
+        <polygon points="140,30 40,100 240,100" fill="currentColor" opacity="0.12"/>
+        <rect x="110" y="140" width="60" height="60" rx="4" fill="currentColor" opacity="0.1"/>
+        <circle cx="140" cy="65" r="8" fill="currentColor" opacity="0.15"/>
+        <rect x="80" y="110" width="25" height="25" rx="3" fill="currentColor" opacity="0.1"/>
+        <rect x="175" y="110" width="25" height="25" rx="3" fill="currentColor" opacity="0.1"/>
+        <circle cx="50" cy="180" r="30" fill="currentColor" opacity="0.06"/>
+        <circle cx="230" cy="160" r="20" fill="currentColor" opacity="0.06"/>
+    </svg>
+    <!-- V4 wrapper (inner gets used for split layout) -->
+    <div class="hero-inner" id="heroInner">
+        <div class="hero-content">
+            <div class="hero-badge">Region Stuttgart &middot; 246 Einrichtungen</div>
+            <h1>Das richtige Pflegeheim finden &mdash; transparent & einfach</h1>
+            <p>Vergleichen Sie Preise, Bewertungen und Leistungen aller Pflegeheime in der Region Stuttgart. Unabh&auml;ngig und kostenlos.</p>
+            <div class="hero-search">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="8.5" cy="8.5" r="6"/>
+                    <line x1="13" y1="13" x2="18" y2="18"/>
+                </svg>
+                <input type="text" id="heroSearch" placeholder="Pflegeheim, Stadtteil oder Ort suchen...">
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="number" id="heroFacilityCount">246</div>
+                    <div class="label">Pflegeheime</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number" id="heroAvgPrice">&mdash;</div>
+                    <div class="label">Eigenanteil/Mo</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number" id="heroRatedCount">&mdash;</div>
+                    <div class="label">Mit Bewertung</div>
+                </div>
+            </div>
+            <p class="hero-disclaimer" style="font-size:12px;color:var(--text-muted);margin-top:24px">Preise: Eigenanteil laut AOK Pflegesatzvereinbarung (PG 2&ndash;5, ohne Investitionskosten)</p>
+        </div>
+        <img class="hero-image" src="https://images.unsplash.com/photo-1727459303950-e4e9aa67ce0a?w=840&q=80" alt="Seniorenpflege" style="display:none">
+    </div>
+</section>
+
+<!-- Filters -->
+<div class="filters-section" id="directory">
+    <div class="filters-inner">
+        <div class="filter-group">
+            <label>Ort</label>
+            <select id="cityFilter">
+                <option value="">Alle Orte</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Max. Preis</label>
+            <input type="number" id="maxPrice" placeholder="z.B. 2500">
+        </div>
+        <div class="filter-group">
+            <label>Pflegeart</label>
+            <select id="careType">
+                <option value="">Alle Arten</option>
+                <option value="kurzzeitpflege">Kurzzeitpflege</option>
+                <option value="langzeitpflege">Langzeitpflege</option>
+                <option value="verfuegbar">Mit Verf&uuml;gbarkeitsinfo</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Bewertung</label>
+            <select id="minRating">
+                <option value="">Alle</option>
+                <option value="4.5">4.5+</option>
+                <option value="4">4+</option>
+                <option value="3.5">3.5+</option>
+                <option value="3">3+</option>
+            </select>
+        </div>
+        <div class="sort-pills">
+            <button class="sort-btn active" data-sort="recommended">Empfohlen</button>
+            <button class="sort-btn" data-sort="price-asc">Preis &uarr;</button>
+            <button class="sort-btn" data-sort="price-desc">Preis &darr;</button>
+            <button class="sort-btn" data-sort="rating">Bewertung</button>
+            <button class="sort-btn" data-sort="distance">N&auml;he</button>
+        </div>
+    </div>
+</div>
+
+<div class="stats-bar" id="statsBar"></div>
+
+<div class="container">
+    <div class="cards" id="cardsContainer"></div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span>OmasOase</span>
+            <p>Wir helfen Familien, das passende Pflegeheim zu finden &mdash; mit transparenten Preisen, echten Bewertungen und unabh&auml;ngiger Beratung.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Kontakt</h4>
+            <a href="mailto:info@omasoase.de">info@omasoase.de</a>
+            <a href="#directory">Pflegeheim suchen</a>
+        </div>
+        <div class="footer-links">
+            <h4>Informationen</h4>
+            <a href="#">Alle Angaben ohne Gew&auml;hr</a>
+            <a href="#">Preise: AOK Pflegenavigator</a>
+            <a href="#">Bewertungen: Google</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 OmasOase &middot; Ein Projekt aus Stuttgart
+    </div>
+</footer>
+
+<!-- Beratung Banner -->
+<div class="beratung-banner" id="beratungBanner">
+    <div class="beratung-banner-text">
+        <strong>Brauchen Sie Hilfe bei der Auswahl?</strong>
+        <span>Wir empfehlen Ihnen passende Pflegeheime &mdash; kostenlos und unverbindlich.</span>
+    </div>
+    <button class="beratung-banner-cta" onclick="startQuiz()">Kostenlose Beratung anfordern</button>
+    <button class="beratung-banner-close" onclick="dismissBanner()" title="Schlie&szlig;en">&times;</button>
+</div>
+
+<!-- Quiz Overlay -->
+<div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-header">
+        <span class="logo">OmasOase</span>
+        <button class="quiz-close" onclick="closeQuiz()">Abbrechen</button>
+    </div>
+    <div class="quiz-progress"><div class="quiz-progress-bar" id="quizProgressBar" style="width:0%"></div></div>
+
+    <div class="quiz-body">
+        <!-- Step 1: Who -->
+        <div class="quiz-step active" data-step="1">
+            <div class="step-label">Schritt 1 von 6</div>
+            <h2>F&uuml;r wen suchen Sie ein Pflegeheim?</h2>
+            <div class="step-desc">Damit wir Ihnen passende Empfehlungen geben k&ouml;nnen.</div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="selectQuiz(1, 'elternteil')">
+                    <div class="opt-label">Elternteil</div>
+                    <div class="opt-desc">Mutter oder Vater</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(1, 'partner')">
+                    <div class="opt-label">Partner/in</div>
+                    <div class="opt-desc">Ehepartner oder Lebensgef&auml;hrte</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(1, 'selbst')">
+                    <div class="opt-label">Mich selbst</div>
+                    <div class="opt-desc">Ich suche f&uuml;r mich</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(1, 'andere')">
+                    <div class="opt-label">Andere Person</div>
+                    <div class="opt-desc">Verwandte, Freunde, Bekannte</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Pflegegrad -->
+        <div class="quiz-step" data-step="2">
+            <div class="step-label">Schritt 2 von 6</div>
+            <h2>Welcher Pflegegrad liegt vor?</h2>
+            <div class="step-desc">Der Pflegegrad bestimmt die H&ouml;he der Zuzahlung durch die Pflegekasse.</div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="selectQuiz(2, 'pg1')">
+                    <div class="opt-label">Pflegegrad 1</div>
+                    <div class="opt-desc">Geringe Beeintr&auml;chtigung</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(2, 'pg2')">
+                    <div class="opt-label">Pflegegrad 2</div>
+                    <div class="opt-desc">Erhebliche Beeintr&auml;chtigung</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(2, 'pg3')">
+                    <div class="opt-label">Pflegegrad 3</div>
+                    <div class="opt-desc">Schwere Beeintr&auml;chtigung</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(2, 'pg4-5')">
+                    <div class="opt-label">Pflegegrad 4 oder 5</div>
+                    <div class="opt-desc">Schwerste Beeintr&auml;chtigung</div>
+                </button>
+            </div>
+            <div class="quiz-nav">
+                <button class="quiz-back" onclick="quizBack(2)">Zur&uuml;ck</button>
+                <button class="quiz-option" onclick="selectQuiz(2, 'unbekannt')" style="border:1px solid var(--border);padding:10px 20px;border-radius:8px">
+                    <div class="opt-label" style="font-size:13px">Wei&szlig; ich noch nicht</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Care type -->
+        <div class="quiz-step" data-step="3">
+            <div class="step-label">Schritt 3 von 6</div>
+            <h2>Welche Art der Pflege wird ben&ouml;tigt?</h2>
+            <div class="step-desc">Verschiedene Pflegeformen bieten unterschiedliche Unterst&uuml;tzung.</div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="selectQuiz(3, 'langzeit')">
+                    <div class="opt-label">Langzeitpflege</div>
+                    <div class="opt-desc">Dauerhafter Aufenthalt im Pflegeheim</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(3, 'kurzzeit')">
+                    <div class="opt-label">Kurzzeitpflege</div>
+                    <div class="opt-desc">Vor&uuml;bergehend, z.B. nach Krankenhausaufenthalt</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(3, 'beides')">
+                    <div class="opt-label">Beides m&ouml;glich</div>
+                    <div class="opt-desc">Noch nicht sicher</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(3, 'beratung')">
+                    <div class="opt-label">Brauche Beratung</div>
+                    <div class="opt-desc">M&ouml;chte zuerst Optionen besprechen</div>
+                </button>
+            </div>
+            <div class="quiz-nav"><button class="quiz-back" onclick="quizBack(3)">Zur&uuml;ck</button></div>
+        </div>
+
+        <!-- Step 4: Timeline -->
+        <div class="quiz-step" data-step="4">
+            <div class="step-label">Schritt 4 von 6</div>
+            <h2>Wie dringend wird ein Platz ben&ouml;tigt?</h2>
+            <div class="step-desc">Damit wir wissen, wie schnell wir Ihnen helfen sollten.</div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="selectQuiz(4, 'sofort')">
+                    <div class="opt-label">Sofort</div>
+                    <div class="opt-desc">Innerhalb der n&auml;chsten Tage</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(4, 'wochen')">
+                    <div class="opt-label">In den n&auml;chsten Wochen</div>
+                    <div class="opt-desc">Innerhalb von 1&ndash;4 Wochen</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(4, 'monate')">
+                    <div class="opt-label">In den n&auml;chsten Monaten</div>
+                    <div class="opt-desc">Kein akuter Zeitdruck</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(4, 'informieren')">
+                    <div class="opt-label">Nur informieren</div>
+                    <div class="opt-desc">Ich schaue mich erstmal um</div>
+                </button>
+            </div>
+            <div class="quiz-nav"><button class="quiz-back" onclick="quizBack(4)">Zur&uuml;ck</button></div>
+        </div>
+
+        <!-- Step 5: Budget -->
+        <div class="quiz-step" data-step="5">
+            <div class="step-label">Schritt 5 von 6</div>
+            <h2>Wie viel Eigenanteil ist tragbar?</h2>
+            <div class="step-desc">Der Eigenanteil liegt in Stuttgart zwischen 700 &euro; und 4.500 &euro; pro Monat.</div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="selectQuiz(5, 'bis-2000')">
+                    <div class="opt-label">Bis 2.000 &euro;/Mo</div>
+                    <div class="opt-desc">G&uuml;nstiger Bereich</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(5, '2000-3000')">
+                    <div class="opt-label">2.000 &ndash; 3.000 &euro;/Mo</div>
+                    <div class="opt-desc">Durchschnittlicher Bereich</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(5, 'ueber-3000')">
+                    <div class="opt-label">&Uuml;ber 3.000 &euro;/Mo</div>
+                    <div class="opt-desc">Gehobener Bereich</div>
+                </button>
+                <button class="quiz-option" onclick="selectQuiz(5, 'egal')">
+                    <div class="opt-label">Noch unklar</div>
+                    <div class="opt-desc">M&ouml;chte erst Preise sehen</div>
+                </button>
+            </div>
+            <div class="quiz-nav"><button class="quiz-back" onclick="quizBack(5)">Zur&uuml;ck</button></div>
+        </div>
+
+        <!-- Step 6: Contact -->
+        <div class="quiz-step" data-step="6">
+            <div class="step-label">Letzter Schritt</div>
+            <h2>Wie k&ouml;nnen wir Sie erreichen?</h2>
+            <div class="step-desc">Wir senden Ihnen eine pers&ouml;nliche Empfehlung &mdash; kostenlos und unverbindlich.</div>
+            <div class="quiz-contact-form">
+                <label>Ihr Name *</label>
+                <input type="text" id="quizName" placeholder="Max Mustermann">
+                <label>E-Mail *</label>
+                <input type="email" id="quizEmail" placeholder="max@beispiel.de">
+                <label>Telefon (optional)</label>
+                <input type="tel" id="quizPhone" placeholder="0711 ...">
+                <label>Noch etwas, das wir wissen sollten? (optional)</label>
+                <textarea id="quizNotes" placeholder="Z.B. besondere Anforderungen, bevorzugter Stadtteil..."></textarea>
+            </div>
+            <div class="quiz-nav">
+                <button class="quiz-back" onclick="quizBack(6)">Zur&uuml;ck</button>
+                <button class="quiz-next" onclick="submitQuiz()">Empfehlung anfordern</button>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div class="quiz-step quiz-success" data-step="done">
+            <div class="check-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h2>Vielen Dank!</h2>
+            <p>Wir haben Ihre Angaben erhalten und erstellen eine pers&ouml;nliche Empfehlung f&uuml;r Sie. Sie h&ouml;ren in K&uuml;rze von uns.</p>
+            <button onclick="closeQuiz()" style="margin-top:24px;padding:12px 32px;background:var(--green-700);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer">Pflegeheime durchsuchen</button>
+        </div>
+    </div>
+</div>
+
+<!-- Compare Bar -->
+<div class="compare-bar" id="compareBar">
+    <span id="compareCount">0 ausgew&auml;hlt</span>
+    <div style="display:flex;gap:8px">
+        <button onclick="clearCompare()">Auswahl leeren</button>
+        <button onclick="showCompare()">Vergleichen</button>
+    </div>
+</div>
+
+<!-- Enquiry Form Modal -->
+<div class="enquiry-overlay" id="enquiryOverlay" onclick="if(event.target===this)closeEnquiry()">
+    <div class="enquiry-modal" id="enquiryModal">
+        <div id="enquiryForm">
+            <h2 id="enquiryTitle">Anfrage senden</h2>
+            <div class="subtitle" id="enquirySubtitle"></div>
+            <input type="hidden" id="enquiryHomeId">
+            <input type="hidden" id="enquiryHomeName">
+            <div class="form-group">
+                <label>Ihr Name *</label>
+                <input type="text" id="enqName" placeholder="Max Mustermann" required>
+            </div>
+            <div class="form-group">
+                <label>E-Mail *</label>
+                <input type="email" id="enqEmail" placeholder="max@beispiel.de" required>
+            </div>
+            <div class="form-group">
+                <label>Telefon (optional)</label>
+                <input type="tel" id="enqPhone" placeholder="0711 ...">
+            </div>
+            <div class="form-group">
+                <label>Pflegegrad</label>
+                <select id="enqPflegegrad">
+                    <option value="">Noch nicht bekannt</option>
+                    <option value="1">Pflegegrad 1</option>
+                    <option value="2">Pflegegrad 2</option>
+                    <option value="3">Pflegegrad 3</option>
+                    <option value="4">Pflegegrad 4</option>
+                    <option value="5">Pflegegrad 5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Was suchen Sie?</label>
+                <select id="enqType">
+                    <option value="langzeit">Langzeitpflege (dauerhaft)</option>
+                    <option value="kurzzeit">Kurzzeitpflege</option>
+                    <option value="info">Allgemeine Informationen</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nachricht (optional)</label>
+                <textarea id="enqMessage" placeholder="Z.B. ab wann wird ein Platz ben&ouml;tigt, besondere Anforderungen..."></textarea>
+            </div>
+            <button class="submit-btn" onclick="submitEnquiry()">Kostenlos anfragen</button>
+            <button class="cancel-btn" onclick="closeEnquiry()">Abbrechen</button>
+        </div>
+        <div id="enquirySuccess" class="success-msg" style="display:none">
+            <div class="check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h2>Anfrage gesendet!</h2>
+            <p>Vielen Dank. Wir leiten Ihre Anfrage an das Pflegeheim weiter und melden uns bei Ihnen.</p>
+            <button class="cancel-btn" onclick="closeEnquiry()" style="margin-top:16px">Schlie&szlig;en</button>
+        </div>
+    </div>
+</div>
+
+<!-- Compare Modal -->
+<div class="modal-overlay" id="compareModal" onclick="closeCompare(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+        <h2>Pflegeheime vergleichen</h2>
+        <div id="compareContent"></div>
+        <button onclick="document.getElementById('compareModal').classList.remove('active')"
+                style="margin-top:16px;padding:10px 20px;border-radius:8px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-family:inherit;font-size:14px">
+            Schlie&szlig;en
+        </button>
+    </div>
+</div>
+
+<script>
+let facilities = [];
+let compareSet = new Set();
+let currentSort = 'recommended';
+
+function formatEur(val) {
+    if (!val && val !== 0) return '\u2013';
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val);
+}
+
+// Bayesian-weighted score: pulls ratings toward the mean based on review count
+// Homes with more reviews get a score closer to their actual rating
+// Homes with few reviews get pulled toward the global average (3.5)
+function recommendedScore(f) {
+    if (!f.google_rating || !f.google_review_count) return 0;
+    const C = 10;  // weight of the prior (how many reviews before we trust the rating)
+    const m = 3.5; // prior mean (assume average)
+    return (f.google_review_count * f.google_rating + C * m) / (f.google_review_count + C);
+}
+
+function getPriceClass(eigenanteil) {
+    if (!eigenanteil) return 'default';
+    if (eigenanteil < 2000) return 'cheap';
+    if (eigenanteil > 3000) return 'expensive';
+    return 'default';
+}
+
+// Clean semicolon-separated AOK data into an array, filtering junk
+function cleanItems(str) {
+    if (!str) return [];
+    return str.split(';')
+        .map(s => s.trim())
+        .filter(s => s && s !== 'k.A.' && !s.match(/^Pflegegrad \d+: k\.A\.$/));
+}
+
+// Parse staff ratio — extract the PG3 ratio as a single number
+function parseStaffRatio(str) {
+    if (!str) return null;
+    const parts = str.split(';').map(s => s.trim());
+    for (const p of parts) {
+        const m = p.match(/Pflegegrad 3:\s*1 Vollzeitstelle:\s*([\d,]+)/);
+        if (m) return parseFloat(m[1].replace(',', '.'));
+    }
+    // Fallback: try any PG
+    for (const p of parts) {
+        const m = p.match(/Pflegegrad \d+:\s*1 Vollzeitstelle:\s*([\d,]+)/);
+        if (m && !p.includes('k.A.')) return parseFloat(m[1].replace(',', '.'));
+    }
+    return null;
+}
+
+// Render tags from array
+function renderTags(items) {
+    return `<div class="detail-tags">${items.map(i => `<span class="detail-tag">${i}</span>`).join('')}</div>`;
+}
+
+// Render bullet list from array
+function renderList(items) {
+    return `<ul class="detail-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+}
+
+// Build the full detail section for a card
+function renderDetailSection(f) {
+    let html = '';
+
+    // Staff ratio — simple readable line
+    const staffRatio = parseStaffRatio(f.staff_ratio);
+    if (staffRatio) {
+        const quality = staffRatio <= 2.0 ? 'gut' : staffRatio <= 3.0 ? 'mittel' : 'niedrig';
+        const color = staffRatio <= 2.0 ? '#065f46' : staffRatio <= 3.0 ? '#92400e' : '#991b1b';
+        const bg = staffRatio <= 2.0 ? '#ecfdf5' : staffRatio <= 3.0 ? '#fffbeb' : '#fef2f2';
+        html += `<div class="detail-section"><div class="detail-label">Personalausstattung</div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:13px;color:var(--text-primary)">1 Pflegekraft f\u00fcr ${String(staffRatio).replace('.', ',')} Bewohner</span>
+                <span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:${bg};color:${color}">${quality}</span>
+            </div></div>`;
+    }
+
+    // Room amenities — as tags
+    const room = cleanItems(f.room_amenities);
+    if (room.length) {
+        html += `<div class="detail-section"><div class="detail-label">Zimmer</div>${renderTags(room)}</div>`;
+    }
+
+    // Facility amenities — as tags
+    const facility = cleanItems(f.facility_amenities);
+    if (facility.length) {
+        html += `<div class="detail-section"><div class="detail-label">Einrichtung</div>${renderTags(facility)}</div>`;
+    }
+
+    // Services — as bullet list (items can be longer)
+    const services = cleanItems(f.services);
+    if (services.length) {
+        // Deduplicate and trim long items
+        const unique = [...new Set(services)].map(s => s.length > 120 ? s.substring(0, 120) + '...' : s);
+        html += `<div class="detail-section"><div class="detail-label">Angebote & Services</div>${renderList(unique)}</div>`;
+    }
+
+    // Meals — as bullet list
+    const meals = cleanItems(f.meal_info);
+    if (meals.length) {
+        html += `<div class="detail-section"><div class="detail-label">Verpflegung</div>${renderList(meals)}</div>`;
+    }
+
+    // Visiting + contact — compact line
+    const extras = [];
+    if (f.visiting_always) extras.push('Besuch jederzeit m\u00f6glich');
+    const contact = (f.contact_persons || '').replace(/\(\)/g, '').trim();
+    if (contact) extras.push(contact);
+    if (f.last_update) extras.push(`Aktualisiert: ${f.last_update}`);
+    if (extras.length) {
+        html += `<div class="detail-section"><div class="detail-label">Weiteres</div>${renderTags(extras)}</div>`;
+    }
+
+    // Web-extracted data
+    if (f.web_pflegeangebote) {
+        html += `<div class="detail-section"><div class="detail-label">Pflegeangebote</div>${renderTags(f.web_pflegeangebote.split(',').map(s => s.trim()).filter(s => s))}</div>`;
+    }
+    if (f.web_lage_umgebung) {
+        html += `<div class="detail-section"><div class="detail-label">Lage & Umgebung</div><p style="font-size:12px;color:var(--text-secondary);line-height:1.5;margin:0">${f.web_lage_umgebung.substring(0, 200)}${f.web_lage_umgebung.length > 200 ? '...' : ''}</p></div>`;
+    }
+    if (f.web_besonderheiten) {
+        html += `<div class="detail-section"><div class="detail-label">Besonderheiten</div><p style="font-size:12px;color:var(--text-secondary);line-height:1.5;margin:0">${f.web_besonderheiten.substring(0, 200)}${f.web_besonderheiten.length > 200 ? '...' : ''}</p></div>`;
+    }
+    if (f.web_verfuegbare_plaetze && !f.web_verfuegbare_plaetze.toLowerCase().includes('keine') && !f.web_verfuegbare_plaetze.toLowerCase().includes('nicht')) {
+        html += `<div class="detail-section"><div style="font-size:12px;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:6px;padding:8px 12px;display:flex;align-items:start;gap:6px"><span style="flex-shrink:0">\u2139</span><span><strong>Verf\u00fcgbarkeit:</strong> ${f.web_verfuegbare_plaetze.substring(0, 150)}</span></div></div>`;
+    }
+
+    // Quality report
+    if (f.quality_report_url) {
+        html += `<div class="detail-section"><a href="${f.quality_report_url}" target="_blank" style="color:var(--green-700);font-size:12px;font-weight:500">Qualit\u00e4tsbericht (MDK-PDF) \u2192</a></div>`;
+    }
+
+    // Show what's missing
+    const missing = [];
+    if (!parseStaffRatio(f.staff_ratio)) missing.push('Personal');
+    if (!cleanItems(f.room_amenities).length) missing.push('Zimmer');
+    if (!cleanItems(f.facility_amenities).length) missing.push('Einrichtung');
+    if (!cleanItems(f.services).length) missing.push('Angebote');
+    if (missing.length) {
+        html += `<div style="font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:12px;display:flex;align-items:start;gap:6px">
+            <span style="flex-shrink:0">&#9888;</span>
+            <span>Keine Angaben vom Pflegeheim zu: <strong>${missing.join(', ')}</strong></span>
+        </div>`;
+    }
+
+    return html || '<span style="font-size:12px;color:var(--text-muted);font-style:italic">Dieses Pflegeheim hat keine weiteren Angaben gemacht.</span>';
+}
+
+function renderCard(f) {
+    const eigenanteil = f.pg3_eigenanteil || f.pg2_eigenanteil || 0;
+    const priceClass = getPriceClass(eigenanteil);
+    const isCompared = compareSet.has(f.id);
+
+    const photoUrl = (f.photo_urls || '').split(';')[0].trim();
+
+    return `
+    <div class="card" data-id="${f.id}">
+        <div class="card-body">
+        <div class="card-top">
+            <div class="card-top-left">
+                <div class="card-name">${f.name}</div>
+                <a class="card-address" href="${f.google_maps_url || '#'}" target="_blank">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1.5C5.5 1.5 3.5 3.8 3.5 6.5C3.5 10 8 14.5 8 14.5S12.5 10 12.5 6.5C12.5 3.8 10.5 1.5 8 1.5Z"/><circle cx="8" cy="6.5" r="1.5"/></svg>
+                    <span class="addr-text">${f.street}, ${f.zip} ${f.city} &middot; ${(f.distance_m/1000).toFixed(1)} km</span>
+                    <span class="maps-hint">→ Google Maps</span>
+                </a>
+                <div class="card-meta">
+                    ${f.google_rating ? `<a href="https://search.google.com/local/reviews?placeid=${f.google_place_id}" target="_blank" class="tag ${f.google_rating >= 4.5 ? 'rating-high' : f.google_rating < 3.0 ? 'rating-low' : 'rating'}" style="text-decoration:none;cursor:pointer">\u2605 ${f.google_rating} (${f.google_review_count})</a>` : ''}
+                    ${f.has_availability ? '<span class="tag" style="background:var(--green-100);color:var(--green-700)">Verf\u00fcgbarkeit</span>' : ''}
+                    ${f.has_kurzzeitpflege ? '<span class="tag kurz">Kurzzeitpflege</span>' : ''}
+                </div>
+            </div>
+            <div class="card-top-right">
+                ${eigenanteil ? `<div class="card-price ${priceClass}" title="Eigenanteil ohne Investitionskosten (zzgl. ca. 300\u2013500 \u20AC/Mo)">${formatEur(eigenanteil)}/Mo</div>` : ''}
+                ${photoUrl ? `<img class="card-photo" src="${photoUrl}" alt="${f.name}" loading="lazy" onerror="this.remove()" onclick="openPhoto(this.src)">` : ''}
+            </div>
+        </div>
+        <button class="toggle-details" onclick="toggleDetails(this)">Mehr Details</button>
+        <div class="card-details">
+            ${renderDetailSection(f)}
+        </div>
+        <div class="card-actions">
+            ${f.phone ? `<a href="tel:${f.phone}" class="action-link">Anrufen</a>` : ''}
+            ${f.email ? `<a href="mailto:${f.email}" class="action-link">E-Mail</a>` : ''}
+            ${f.website ? `<a href="${f.website}" target="_blank" class="action-link">Webseite</a>` : ''}
+            <a href="#" class="action-link" onclick="toggleCompare('${f.id}'); return false;" style="${isCompared ? 'background:var(--green-700);color:#fff;border-color:var(--green-700)' : ''}">${isCompared ? '\u2713 Gew\u00e4hlt' : 'Vergleichen'}</a>
+            <button class="anfrage-btn" onclick="openEnquiry('${f.id}', '${f.name.replace(/'/g, "\\'")}')">Anfrage senden</button>
+        </div>
+        </div>
+    </div>`;
+}
+
+function openPhoto(src) {
+    const overlay = document.createElement('div');
+    overlay.className = 'photo-overlay';
+    overlay.innerHTML = `<img src="${src}">`;
+    overlay.onclick = () => overlay.remove();
+    document.body.appendChild(overlay);
+}
+
+function toggleDetails(btn) {
+    const details = btn.nextElementSibling;
+    details.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.textContent = details.classList.contains('open') ? 'Weniger anzeigen' : 'Mehr Details';
+    checkEngagement();
+}
+
+function toggleCompare(id) {
+    if (compareSet.has(id)) {
+        compareSet.delete(id);
+    } else if (compareSet.size < 5) {
+        compareSet.add(id);
+    }
+    updateCompareBar();
+    render();
+}
+
+function updateCompareBar() {
+    const bar = document.getElementById('compareBar');
+    const count = document.getElementById('compareCount');
+    const banner = document.getElementById('beratungBanner');
+    if (compareSet.size > 0) {
+        bar.classList.add('active');
+        count.textContent = `${compareSet.size} ausgew\u00e4hlt`;
+        if (banner) banner.classList.remove('visible');
+    } else {
+        bar.classList.remove('active');
+        if (bannerShown && !bannerDismissed && banner) banner.classList.add('visible');
+    }
+}
+
+function clearCompare() {
+    compareSet.clear();
+    updateCompareBar();
+    render();
+}
+
+function showCompare() {
+    const selected = facilities.filter(f => compareSet.has(f.id));
+    if (selected.length < 2) return;
+
+    const fields = [
+        ['Google Bewertung', f => f.google_rating ? `${'\u2605'.repeat(Math.round(f.google_rating))} ${f.google_rating} (${f.google_review_count})` : '\u2013'],
+        ['Eigenanteil/Mo', f => formatEur(f.pg3_eigenanteil || f.pg2_eigenanteil)],
+        ['Ort', f => `${f.zip} ${f.city}`],
+        ['Entfernung', f => `${(f.distance_m/1000).toFixed(1)} km`],
+        ['Kurzzeitpflege', f => f.has_kurzzeitpflege ? 'Ja' : 'Nein'],
+        ['Personal', f => { const r = parseStaffRatio(f.staff_ratio); return r ? `1:${String(r).replace('.',',')}` : '\u2013'; }],
+        ['Baujahr', f => f.construction_year || '\u2013'],
+        ['Telefon', f => f.phone || '\u2013'],
+        ['Webseite', f => f.website ? `<a href="${f.website}" target="_blank" style="color:var(--green-700)">Zur Webseite</a>` : '\u2013'],
+    ];
+
+    let html = '<div style="overflow-x:auto"><table class="compare-table"><thead><tr><th></th>';
+    selected.forEach(f => { html += `<td><strong>${f.name}</strong><br><span style="font-size:12px;color:var(--text-muted)">${f.city}</span></td>`; });
+    html += '</tr></thead><tbody>';
+    fields.forEach(([label, getter]) => {
+        html += `<tr><th>${label}</th>`;
+        selected.forEach(f => { html += `<td>${getter(f)}</td>`; });
+        html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+
+    document.getElementById('compareContent').innerHTML = html;
+    document.getElementById('compareModal').classList.add('active');
+}
+
+function closeCompare(e) {
+    if (e.target === e.currentTarget) {
+        document.getElementById('compareModal').classList.remove('active');
+    }
+}
+
+function getFiltered() {
+    const search = (document.getElementById('heroSearch').value || '').toLowerCase();
+    const city = document.getElementById('cityFilter').value;
+    const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+    const careType = document.getElementById('careType').value;
+    const minRating = parseFloat(document.getElementById('minRating').value) || 0;
+
+    let filtered = facilities.filter(f => {
+        if (search && !f.name.toLowerCase().includes(search) && !f.city.toLowerCase().includes(search) && !(f.street || '').toLowerCase().includes(search)) return false;
+        if (city && f.city !== city) return false;
+        const price = f.pg3_eigenanteil || f.pg2_eigenanteil || 0;
+        if (price > maxPrice) return false;
+        if (careType === 'kurzzeitpflege' && !f.has_kurzzeitpflege) return false;
+        if (careType === 'verfuegbar' && !f.has_availability) return false;
+        if (minRating && (!f.google_rating || f.google_rating < minRating)) return false;
+        return true;
+    });
+
+    filtered.sort((a, b) => {
+        const pa = a.pg3_eigenanteil || a.pg2_eigenanteil || 99999;
+        const pb = b.pg3_eigenanteil || b.pg2_eigenanteil || 99999;
+        switch (currentSort) {
+            case 'recommended': return recommendedScore(b) - recommendedScore(a);
+            case 'price-asc': return pa - pb;
+            case 'price-desc': return pb - pa;
+            case 'rating': return (b.google_rating || 0) - (a.google_rating || 0);
+            case 'distance': return (a.distance_m || 0) - (b.distance_m || 0);
+            default: return 0;
+        }
+    });
+
+    return filtered;
+}
+
+function render() {
+    const filtered = getFiltered();
+    const container = document.getElementById('cardsContainer');
+    const left = [];
+    const right = [];
+    filtered.forEach((f, i) => (i % 2 === 0 ? left : right).push(renderCard(f)));
+    container.innerHTML = `<div class="cards-col">${left.join('')}</div><div class="cards-col">${right.join('')}</div>`;
+
+    const prices = filtered.map(f => f.pg3_eigenanteil || f.pg2_eigenanteil).filter(p => p > 0);
+    const avg = prices.length ? prices.reduce((a,b) => a+b, 0) / prices.length : 0;
+    const min = prices.length ? Math.min(...prices) : 0;
+    const max = prices.length ? Math.max(...prices) : 0;
+    const kurz = filtered.filter(f => f.has_kurzzeitpflege).length;
+
+    document.getElementById('statsBar').textContent =
+        `${filtered.length} von ${facilities.length} Einrichtungen \u00b7 Eigenanteil: ${formatEur(min)} \u2013 ${formatEur(max)} (Schnitt ${formatEur(avg)}) \u00b7 ${kurz} mit Kurzzeitpflege`;
+}
+
+function updateHeroStats() {
+    const prices = facilities.map(f => f.pg3_eigenanteil || f.pg2_eigenanteil).filter(p => p > 0);
+    const avg = prices.length ? Math.round(prices.reduce((a,b) => a+b, 0) / prices.length) : 0;
+    const rated = facilities.filter(f => f.google_rating > 0).length;
+    document.getElementById('heroFacilityCount').textContent = facilities.length;
+    document.getElementById('heroAvgPrice').textContent = avg ? `\u00d8 ${formatEur(avg)}` : '\u2013';
+    document.getElementById('heroRatedCount').textContent = rated;
+}
+
+function populateCityFilter() {
+    const cities = {};
+    facilities.forEach(f => { cities[f.city] = (cities[f.city] || 0) + 1; });
+    const sorted = Object.entries(cities).sort((a,b) => b[1] - a[1]);
+    const select = document.getElementById('cityFilter');
+    sorted.forEach(([city, count]) => {
+        const opt = document.createElement('option');
+        opt.value = city;
+        opt.textContent = `${city} (${count})`;
+        select.appendChild(opt);
+    });
+}
+
+// Event listeners
+document.getElementById('heroSearch').addEventListener('input', render);
+document.getElementById('cityFilter').addEventListener('change', render);
+document.getElementById('maxPrice').addEventListener('input', render);
+document.getElementById('careType').addEventListener('change', render);
+document.getElementById('minRating').addEventListener('change', render);
+
+document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSort = btn.dataset.sort;
+        render();
+    });
+});
+
+// Enquiry form
+function openEnquiry(id, name) {
+    document.getElementById('enquiryHomeId').value = id;
+    document.getElementById('enquiryHomeName').value = name;
+    document.getElementById('enquiryTitle').textContent = 'Anfrage: ' + name;
+    const fac = facilities.find(f => f.id === id);
+    document.getElementById('enquirySubtitle').textContent = fac ? `${fac.city} \u00b7 Eigenanteil ab ${formatEur(fac.pg3_eigenanteil || fac.pg2_eigenanteil)}/Mo` : '';
+    document.getElementById('enquiryForm').style.display = '';
+    document.getElementById('enquirySuccess').style.display = 'none';
+    document.getElementById('enquiryOverlay').classList.add('active');
+    trackEvent('enquiry_open', { home_id: id, home_name: name });
+}
+
+function closeEnquiry() {
+    document.getElementById('enquiryOverlay').classList.remove('active');
+}
+
+function submitEnquiry() {
+    const name = document.getElementById('enqName').value.trim();
+    const email = document.getElementById('enqEmail').value.trim();
+    if (!name || !email) {
+        alert('Bitte Name und E-Mail angeben.');
+        return;
+    }
+
+    const data = {
+        home_id: document.getElementById('enquiryHomeId').value,
+        home_name: document.getElementById('enquiryHomeName').value,
+        user_name: name,
+        user_email: email,
+        user_phone: document.getElementById('enqPhone').value,
+        pflegegrad: document.getElementById('enqPflegegrad').value,
+        care_type: document.getElementById('enqType').value,
+        message: document.getElementById('enqMessage').value,
+        timestamp: new Date().toISOString(),
+    };
+
+    const enquiries = JSON.parse(localStorage.getItem('omasoase_enquiries') || '[]');
+    enquiries.push(data);
+    localStorage.setItem('omasoase_enquiries', JSON.stringify(enquiries));
+
+    trackEvent('enquiry_submit', data);
+
+    document.getElementById('enquiryForm').style.display = 'none';
+    document.getElementById('enquirySuccess').style.display = '';
+
+    document.getElementById('enqName').value = '';
+    document.getElementById('enqEmail').value = '';
+    document.getElementById('enqPhone').value = '';
+    document.getElementById('enqMessage').value = '';
+}
+
+// Analytics
+const analytics = [];
+function trackEvent(event, data = {}) {
+    const entry = { event, ...data, time: new Date().toISOString(), url: location.href };
+    analytics.push(entry);
+    const stored = JSON.parse(localStorage.getItem('omasoase_analytics') || '[]');
+    stored.push(entry);
+    localStorage.setItem('omasoase_analytics', JSON.stringify(stored));
+    // Send to GA4
+    if (typeof gtag === 'function') {
+        gtag('event', event, data);
+    }
+}
+
+trackEvent('page_view');
+
+['heroSearch','cityFilter','maxPrice','careType','minRating'].forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+        trackEvent('filter_change', { filter: id, value: document.getElementById(id).value });
+        checkEngagement();
+    });
+});
+
+// --- Beratung Banner (shows after engagement) ---
+let bannerShown = false;
+let bannerDismissed = false;
+let engagementScore = 0;
+
+function checkEngagement() {
+    if (bannerShown || bannerDismissed) return;
+    engagementScore++;
+    // Show after 3 interactions (detail clicks, filter changes, scrolling)
+    if (engagementScore >= 3) {
+        showBanner();
+    }
+}
+
+function showBanner() {
+    if (bannerDismissed) return;
+    bannerShown = true;
+    document.getElementById('beratungBanner').classList.add('visible');
+    trackEvent('beratung_banner_shown');
+}
+
+function dismissBanner() {
+    bannerDismissed = true;
+    document.getElementById('beratungBanner').classList.remove('visible');
+    document.getElementById('beratungBanner').classList.add('dismissed');
+}
+
+// Trigger engagement on detail expand
+const origToggleDetails = toggleDetails;
+
+// Trigger on scroll past cards
+let scrollTriggered = false;
+window.addEventListener('scroll', () => {
+    if (scrollTriggered) return;
+    const cards = document.getElementById('cardsContainer');
+    if (!cards) return;
+    const rect = cards.getBoundingClientRect();
+    // If user has scrolled past roughly 5 cards worth
+    if (rect.top < -600) {
+        scrollTriggered = true;
+        showBanner(); // scrolling past several cards = engaged enough
+    }
+});
+
+// --- Quiz ---
+let quizAnswers = {};
+let quizCurrentStep = 1;
+
+function startQuiz() {
+    quizAnswers = {};
+    quizCurrentStep = 1;
+    showQuizStep(1);
+    document.getElementById('quizOverlay').classList.add('active');
+    document.getElementById('quizProgressBar').style.width = '0%';
+    trackEvent('quiz_start');
+}
+
+function closeQuiz() {
+    document.getElementById('quizOverlay').classList.remove('active');
+}
+
+function showQuizStep(step) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
+    if (target) target.classList.add('active');
+    quizCurrentStep = step;
+    const progress = step === 'done' ? 100 : Math.round(((step - 1) / 6) * 100);
+    document.getElementById('quizProgressBar').style.width = progress + '%';
+}
+
+function selectQuiz(step, value) {
+    quizAnswers[`step${step}`] = value;
+    // Highlight selected
+    const stepEl = document.querySelector(`.quiz-step[data-step="${step}"]`);
+    stepEl.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    // Auto-advance after short delay
+    setTimeout(() => showQuizStep(step + 1), 200);
+    trackEvent('quiz_step', { step, value });
+}
+
+function quizBack(currentStep) {
+    showQuizStep(currentStep - 1);
+}
+
+function submitQuiz() {
+    const name = document.getElementById('quizName').value.trim();
+    const email = document.getElementById('quizEmail').value.trim();
+    if (!name || !email) {
+        alert('Bitte Name und E-Mail angeben.');
+        return;
+    }
+    quizAnswers.name = name;
+    quizAnswers.email = email;
+    quizAnswers.phone = document.getElementById('quizPhone').value;
+    quizAnswers.notes = document.getElementById('quizNotes').value;
+    quizAnswers.timestamp = new Date().toISOString();
+
+    // Store locally
+    const leads = JSON.parse(localStorage.getItem('omasoase_quiz_leads') || '[]');
+    leads.push(quizAnswers);
+    localStorage.setItem('omasoase_quiz_leads', JSON.stringify(leads));
+
+    trackEvent('quiz_submit', quizAnswers);
+    showQuizStep('done');
+}
+
+// Load data
+fetch('data/stuttgart_final.csv')
+    .then(r => r.text())
+    .then(csv => {
+        // Parse CSV properly handling newlines inside quoted fields
+        function parseCSV(text) {
+            const rows = [];
+            let current = [];
+            let field = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i];
+                if (ch === '"') {
+                    if (inQuotes && text[i+1] === '"') {
+                        field += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (ch === ',' && !inQuotes) {
+                    current.push(field);
+                    field = '';
+                } else if (ch === '\n' && !inQuotes) {
+                    current.push(field);
+                    field = '';
+                    if (current.length > 1) rows.push(current);
+                    current = [];
+                } else if (ch === '\r') {
+                    // skip
+                } else {
+                    field += ch;
+                }
+            }
+            if (current.length > 1) { current.push(field); rows.push(current); }
+            return rows;
+        }
+
+        const parsed = parseCSV(csv);
+        const headers = parsed[0].map(h => h.trim());
+
+        facilities = parsed.slice(1).map(vals => {
+            const obj = {};
+            headers.forEach((h, i) => { obj[h] = (vals[i] || '').trim(); });
+            ['pg2_eigenanteil','pg3_eigenanteil','pg4_eigenanteil','pg5_eigenanteil',
+             'pg2_total_month','pg3_total_month','pg4_total_month','pg5_total_month',
+             'distance_m','lat','lon','photo_count','google_rating','google_review_count'].forEach(k => {
+                obj[k] = parseFloat(obj[k]) || 0;
+            });
+            obj.has_kurzzeitpflege = obj.has_kurzzeitpflege === 'True';
+            obj.visiting_always = obj.visiting_always === 'True';
+            const avail = (obj.web_verfuegbare_plaetze || '').toLowerCase();
+            obj.has_availability = avail && !avail.includes('keine') && !avail.includes('nicht');
+            return obj;
+        });
+
+        populateCityFilter();
+        updateHeroStats();
+        render();
+    });
+</script>
+
+<!-- Hero Switcher (temporary) -->
+<div class="hero-switcher">
+    <div class="label">Hero Style</div>
+    <button class="hero-sw-btn" onclick="setHero('default')" data-hero="default">Current</button>
+    <button class="hero-sw-btn" onclick="setHero('v1')" data-hero="v1">Photo BG</button>
+    <button class="hero-sw-btn" onclick="setHero('v2')" data-hero="v2">Gradient</button>
+    <button class="hero-sw-btn" onclick="setHero('v3')" data-hero="v3">Illustration</button>
+    <button class="hero-sw-btn" onclick="setHero('v4')" data-hero="v4">Split Photo</button>
+</div>
+
+<script>
+function setHero(variant) {
+    const hero = document.getElementById('heroSection');
+    const img = hero.querySelector('.hero-image');
+    const illust = hero.querySelector('.hero-illustration');
+    const disclaimer = hero.querySelector('.hero-disclaimer');
+
+    // Reset
+    hero.className = 'hero';
+    if (img) img.style.display = 'none';
+    if (illust) illust.style.display = 'none';
+    if (disclaimer) disclaimer.style.color = 'var(--text-muted)';
+
+    if (variant === 'v1') {
+        hero.classList.add('hero-v1');
+        if (disclaimer) disclaimer.style.color = 'rgba(255,255,255,0.5)';
+    } else if (variant === 'v2') {
+        hero.classList.add('hero-v2');
+    } else if (variant === 'v3') {
+        hero.classList.add('hero-v3');
+        if (illust) illust.style.display = 'block';
+    } else if (variant === 'v4') {
+        hero.classList.add('hero-v4');
+        if (img) img.style.display = 'block';
+    }
+
+    document.querySelectorAll('.hero-sw-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.hero === variant);
+    });
+}
+setHero('default');
+</script>
+
+</body>
+</html>
