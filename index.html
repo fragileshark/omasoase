@@ -855,12 +855,17 @@
         .enquiry-modal {
             background: var(--white);
             border-radius: 16px;
-            padding: 36px;
             max-width: 480px;
             width: 90vw;
             max-height: 90vh;
-            overflow-y: auto;
+            overflow: hidden;
             box-shadow: var(--shadow-lg);
+        }
+
+        .enquiry-modal > div {
+            padding: 36px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .enquiry-modal h2 {
