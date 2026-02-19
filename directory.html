@@ -1400,7 +1400,7 @@
                 </div>
                 <div class="hero-stat">
                     <div class="number" id="heroAvgPrice">&mdash;</div>
-                    <div class="label">Eigenanteil/Mo</div>
+                    <div class="label" id="heroPriceLabel">Eigenanteil/Mo</div>
                 </div>
                 <div class="hero-stat">
                     <div class="number" id="heroRatedCount">&mdash;</div>
@@ -1419,6 +1419,17 @@
             <label>Ort</label>
             <select id="cityFilter">
                 <option value="">Alle Orte</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Pflegegrad</label>
+            <select id="pflegegradFilter">
+                <option value="">Alle (PG 2&ndash;5)</option>
+                <option value="1">Pflegegrad 1</option>
+                <option value="2">Pflegegrad 2</option>
+                <option value="3">Pflegegrad 3</option>
+                <option value="4">Pflegegrad 4</option>
+                <option value="5">Pflegegrad 5</option>
             </select>
         </div>
         <div class="filter-group">
@@ -1779,6 +1790,12 @@ function recommendedScore(f) {
     return (f.google_review_count * f.google_rating + C * m) / (f.google_review_count + C);
 }
 
+function getPrice(f) {
+    const pg = document.getElementById('pflegegradFilter').value;
+    if (pg === '1') return f.pg1_total_month || f.eigenanteil || 0;
+    return f.eigenanteil || 0;
+}
+
 function getPriceClass(eigenanteil) {
     if (!eigenanteil) return 'default';
     if (eigenanteil < 2800) return 'cheap';
@@ -1909,7 +1926,7 @@ function renderDetailSection(f) {
 }
 
 function renderCard(f) {
-    const eigenanteil = f.eigenanteil || 0;
+    const eigenanteil = getPrice(f);
     const priceClass = getPriceClass(eigenanteil);
     const isCompared = compareSet.has(f.id);
 
@@ -2004,7 +2021,7 @@ function showCompare() {
 
     const fields = [
         ['Google Bewertung', f => f.google_rating ? `${'\u2605'.repeat(Math.round(f.google_rating))} ${f.google_rating} (${f.google_review_count})` : '\u2013'],
-        ['Eigenanteil/Mo', f => formatEur(f.eigenanteil)],
+        ['Eigenanteil/Mo', f => formatEur(getPrice(f))],
         ['Ort', f => `${f.zip} ${f.city}`],
         ['Entfernung', f => `${(f.distance_m/1000).toFixed(1)} km`],
         ['Kurzzeitpflege', f => f.has_kurzzeitpflege ? 'Ja' : 'Nein'],
@@ -2044,7 +2061,7 @@ function getFiltered() {
     let filtered = facilities.filter(f => {
         if (search && !f.name.toLowerCase().includes(search) && !f.city.toLowerCase().includes(search) && !(f.street || '').toLowerCase().includes(search)) return false;
         if (city && f.city !== city) return false;
-        const price = f.eigenanteil || 0;
+        const price = getPrice(f);
         if (price > maxPrice) return false;
         if (careType === 'kurzzeitpflege' && !f.has_kurzzeitpflege) return false;
         if (careType === 'verfuegbar' && !f.has_availability) return false;
@@ -2053,8 +2070,8 @@ function getFiltered() {
     });
 
     filtered.sort((a, b) => {
-        const pa = a.eigenanteil || 99999;
-        const pb = b.eigenanteil || 99999;
+        const pa = getPrice(a) || 99999;
+        const pb = getPrice(b) || 99999;
         switch (currentSort) {
             case 'recommended': return recommendedScore(b) - recommendedScore(a);
             case 'price-asc': return pa - pb;
@@ -2076,7 +2093,7 @@ function render() {
     filtered.forEach((f, i) => (i % 2 === 0 ? left : right).push(renderCard(f)));
     container.innerHTML = `<div class="cards-col">${left.join('')}</div><div class="cards-col">${right.join('')}</div>`;
 
-    const prices = filtered.map(f => f.eigenanteil).filter(p => p > 0);
+    const prices = filtered.map(f => getPrice(f)).filter(p => p > 0);
     const avg = prices.length ? prices.reduce((a,b) => a+b, 0) / prices.length : 0;
     const min = prices.length ? Math.min(...prices) : 0;
     const max = prices.length ? Math.max(...prices) : 0;
@@ -2087,12 +2104,15 @@ function render() {
 }
 
 function updateHeroStats() {
-    const prices = facilities.map(f => f.eigenanteil).filter(p => p > 0);
+    const prices = facilities.map(f => getPrice(f)).filter(p => p > 0);
     const avg = prices.length ? Math.round(prices.reduce((a,b) => a+b, 0) / prices.length) : 0;
     const rated = facilities.filter(f => f.google_rating > 0).length;
+    const pg = document.getElementById('pflegegradFilter') ? document.getElementById('pflegegradFilter').value : '';
     document.getElementById('heroFacilityCount').textContent = facilities.length;
     document.getElementById('heroAvgPrice').textContent = avg ? `\u00d8 ${formatEur(avg)}` : '\u2013';
     document.getElementById('heroRatedCount').textContent = rated;
+    const label = document.getElementById('heroPriceLabel');
+    if (label) label.textContent = pg ? `Eigenanteil PG ${pg}/Mo` : 'Eigenanteil/Mo';
 }
 
 function populateCityFilter() {
@@ -2111,6 +2131,7 @@ function populateCityFilter() {
 // Event listeners
 document.getElementById('heroSearch').addEventListener('input', render);
 document.getElementById('cityFilter').addEventListener('change', render);
+document.getElementById('pflegegradFilter').addEventListener('change', function() { updateHeroStats(); render(); });
 document.getElementById('maxPrice').addEventListener('input', render);
 document.getElementById('careType').addEventListener('change', render);
 document.getElementById('minRating').addEventListener('change', render);
@@ -2130,7 +2151,7 @@ function openEnquiry(id, name) {
     document.getElementById('enquiryHomeName').value = name;
     document.getElementById('enquiryTitle').textContent = 'Anfrage: ' + name;
     const fac = facilities.find(f => f.id === id);
-    document.getElementById('enquirySubtitle').textContent = fac ? `${fac.city} \u00b7 Eigenanteil ab ${formatEur(fac.eigenanteil)}/Mo` : '';
+    document.getElementById('enquirySubtitle').textContent = fac ? `${fac.city} \u00b7 Eigenanteil ab ${formatEur(getPrice(fac))}/Mo` : '';
     document.getElementById('enquiryForm').style.display = '';
     document.getElementById('enquirySuccess').style.display = 'none';
     document.getElementById('enquiryOverlay').classList.add('active');
@@ -2195,12 +2216,12 @@ function submitEnquiry() {
             document.getElementById('enquirySuccess').style.display = '';
         } else {
             console.error('Web3Forms error:', res);
-            alert('Web3Forms: ' + (res.message || JSON.stringify(res)));
+            alert('Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter info@omasoase.de');
         }
     }).catch(err => {
         console.error('Web3Forms failed:', err);
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Kostenlos anfragen'; }
-        alert('Netzwerkfehler: ' + err.message);
+        alert('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.');
     });
 
     document.getElementById('enqName').value = '';
@@ -2230,7 +2251,7 @@ function trackEvent(event, data = {}) {
 
 trackEvent('page_view');
 
-['heroSearch','cityFilter','maxPrice','careType','minRating'].forEach(id => {
+['heroSearch','cityFilter','pflegegradFilter','maxPrice','careType','minRating'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
         trackEvent('filter_change', { filter: id, value: document.getElementById(id).value });
         checkEngagement();
@@ -2371,12 +2392,12 @@ function submitQuiz() {
             showQuizStep('done');
         } else {
             console.error('Web3Forms error:', res);
-            alert('Web3Forms: ' + (res.message || JSON.stringify(res)));
+            alert('Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter info@omasoase.de');
         }
     }).catch(err => {
         console.error('Web3Forms failed:', err);
         if (quizBtn) { quizBtn.disabled = false; quizBtn.textContent = 'Empfehlung anfordern'; }
-        alert('Netzwerkfehler: ' + err.message);
+        alert('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.');
     });
 }
 
@@ -2424,7 +2445,8 @@ fetch('data/stuttgart_final.csv')
         facilities = parsed.slice(1).map(vals => {
             const obj = {};
             headers.forEach((h, i) => { obj[h] = (vals[i] || '').trim(); });
-            ['pg2_eigenanteil','pg3_eigenanteil','pg4_eigenanteil','pg5_eigenanteil',
+            ['pg1_total_month','pg1_eigenanteil',
+             'pg2_eigenanteil','pg3_eigenanteil','pg4_eigenanteil','pg5_eigenanteil',
              'pg2_total_month','pg3_total_month','pg4_total_month','pg5_total_month',
              'distance_m','lat','lon','photo_count','google_rating','google_review_count'].forEach(k => {
                 obj[k] = parseFloat(obj[k]) || 0;
