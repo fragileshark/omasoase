@@ -11,13 +11,18 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://omasoase.de">
     <link rel="canonical" href="https://omasoase.de">
-    <!-- Google Analytics (GA4) -->
+    <!-- Google Analytics (GA4) — default denied until cookie consent -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FX9ZFMQSEM"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', { analytics_storage: 'denied' });
         gtag('js', new Date());
         gtag('config', 'G-FX9ZFMQSEM');
+        // If user previously consented, grant immediately
+        if (localStorage.getItem('omasoase_consent') === 'all') {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1390,7 +1395,7 @@
                     <div class="label">Mit Bewertung</div>
                 </div>
             </div>
-            <p class="hero-disclaimer" style="font-size:12px;color:var(--text-muted);margin-top:24px">Preise: Eigenanteil laut AOK Pflegesatzvereinbarung (PG 2&ndash;5, ohne Investitionskosten)</p>
+            <p class="hero-disclaimer" style="font-size:12px;color:var(--text-muted);margin-top:24px">Preise: Eigenanteil laut AOK Pflegesatzvereinbarung (PG 2&ndash;5, ohne Investitions- und Ausbildungskosten) &middot; Stand: Februar 2026</p>
         </div>
     </div>
 </section>
@@ -1406,7 +1411,7 @@
         </div>
         <div class="filter-group">
             <label>Max. Preis</label>
-            <input type="number" id="maxPrice" placeholder="z.B. 2500">
+            <input type="number" id="maxPrice" placeholder="z.B. 3500">
         </div>
         <div class="filter-group">
             <label>Pflegeart</label>
@@ -1631,7 +1636,7 @@
             <h2>Wie k&ouml;nnen wir Sie erreichen?</h2>
             <div class="step-desc">Wir senden Ihnen eine pers&ouml;nliche Empfehlung &mdash; kostenlos und unverbindlich.</div>
             <div class="quiz-contact-form">
-                <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" id="quizWebsite" tabindex="-1" autocomplete="off"></div>
+                <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" id="quiz_hp_check" name="botcheck2" tabindex="-1" autocomplete="new-password"></div>
                 <label>Ihr Name *</label>
                 <input type="text" id="quizName" placeholder="Max Mustermann">
                 <label>E-Mail *</label>
@@ -1678,7 +1683,7 @@
             <div class="subtitle" id="enquirySubtitle"></div>
             <input type="hidden" id="enquiryHomeId">
             <input type="hidden" id="enquiryHomeName">
-            <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" id="enqWebsite" tabindex="-1" autocomplete="off"></div>
+            <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" id="enq_hp_check" name="botcheck" tabindex="-1" autocomplete="new-password"></div>
             <div class="form-group">
                 <label>Ihr Name *</label>
                 <input type="text" id="enqName" placeholder="Max Mustermann" required>
@@ -1764,8 +1769,8 @@ function recommendedScore(f) {
 
 function getPriceClass(eigenanteil) {
     if (!eigenanteil) return 'default';
-    if (eigenanteil < 2000) return 'cheap';
-    if (eigenanteil > 3000) return 'expensive';
+    if (eigenanteil < 2800) return 'cheap';
+    if (eigenanteil > 3500) return 'expensive';
     return 'default';
 }
 
@@ -1892,7 +1897,7 @@ function renderDetailSection(f) {
 }
 
 function renderCard(f) {
-    const eigenanteil = f.pg3_eigenanteil || f.pg2_eigenanteil || 0;
+    const eigenanteil = f.eigenanteil || 0;
     const priceClass = getPriceClass(eigenanteil);
     const isCompared = compareSet.has(f.id);
 
@@ -1916,7 +1921,7 @@ function renderCard(f) {
                 </div>
             </div>
             <div class="card-top-right">
-                ${eigenanteil ? `<div class="card-price ${priceClass}" title="Eigenanteil ohne Investitionskosten (zzgl. ca. 300\u2013500 \u20AC/Mo)">${formatEur(eigenanteil)}/Mo</div>` : ''}
+                ${eigenanteil ? `<div class="card-price ${priceClass}" title="Eigenanteil ohne Investitions- und Ausbildungskosten (zzgl. ca. 400\u2013700 \u20AC/Mo)">${formatEur(eigenanteil)}/Mo</div>` : ''}
                 ${photoUrl ? `<img class="card-photo" src="${photoUrl}" alt="${f.name}" loading="lazy" onerror="this.remove()" onclick="openPhoto(this.src)">` : ''}
             </div>
         </div>
@@ -1987,7 +1992,7 @@ function showCompare() {
 
     const fields = [
         ['Google Bewertung', f => f.google_rating ? `${'\u2605'.repeat(Math.round(f.google_rating))} ${f.google_rating} (${f.google_review_count})` : '\u2013'],
-        ['Eigenanteil/Mo', f => formatEur(f.pg3_eigenanteil || f.pg2_eigenanteil)],
+        ['Eigenanteil/Mo', f => formatEur(f.eigenanteil)],
         ['Ort', f => `${f.zip} ${f.city}`],
         ['Entfernung', f => `${(f.distance_m/1000).toFixed(1)} km`],
         ['Kurzzeitpflege', f => f.has_kurzzeitpflege ? 'Ja' : 'Nein'],
@@ -2027,7 +2032,7 @@ function getFiltered() {
     let filtered = facilities.filter(f => {
         if (search && !f.name.toLowerCase().includes(search) && !f.city.toLowerCase().includes(search) && !(f.street || '').toLowerCase().includes(search)) return false;
         if (city && f.city !== city) return false;
-        const price = f.pg3_eigenanteil || f.pg2_eigenanteil || 0;
+        const price = f.eigenanteil || 0;
         if (price > maxPrice) return false;
         if (careType === 'kurzzeitpflege' && !f.has_kurzzeitpflege) return false;
         if (careType === 'verfuegbar' && !f.has_availability) return false;
@@ -2036,8 +2041,8 @@ function getFiltered() {
     });
 
     filtered.sort((a, b) => {
-        const pa = a.pg3_eigenanteil || a.pg2_eigenanteil || 99999;
-        const pb = b.pg3_eigenanteil || b.pg2_eigenanteil || 99999;
+        const pa = a.eigenanteil || 99999;
+        const pb = b.eigenanteil || 99999;
         switch (currentSort) {
             case 'recommended': return recommendedScore(b) - recommendedScore(a);
             case 'price-asc': return pa - pb;
@@ -2059,7 +2064,7 @@ function render() {
     filtered.forEach((f, i) => (i % 2 === 0 ? left : right).push(renderCard(f)));
     container.innerHTML = `<div class="cards-col">${left.join('')}</div><div class="cards-col">${right.join('')}</div>`;
 
-    const prices = filtered.map(f => f.pg3_eigenanteil || f.pg2_eigenanteil).filter(p => p > 0);
+    const prices = filtered.map(f => f.eigenanteil).filter(p => p > 0);
     const avg = prices.length ? prices.reduce((a,b) => a+b, 0) / prices.length : 0;
     const min = prices.length ? Math.min(...prices) : 0;
     const max = prices.length ? Math.max(...prices) : 0;
@@ -2070,7 +2075,7 @@ function render() {
 }
 
 function updateHeroStats() {
-    const prices = facilities.map(f => f.pg3_eigenanteil || f.pg2_eigenanteil).filter(p => p > 0);
+    const prices = facilities.map(f => f.eigenanteil).filter(p => p > 0);
     const avg = prices.length ? Math.round(prices.reduce((a,b) => a+b, 0) / prices.length) : 0;
     const rated = facilities.filter(f => f.google_rating > 0).length;
     document.getElementById('heroFacilityCount').textContent = facilities.length;
@@ -2113,7 +2118,7 @@ function openEnquiry(id, name) {
     document.getElementById('enquiryHomeName').value = name;
     document.getElementById('enquiryTitle').textContent = 'Anfrage: ' + name;
     const fac = facilities.find(f => f.id === id);
-    document.getElementById('enquirySubtitle').textContent = fac ? `${fac.city} \u00b7 Eigenanteil ab ${formatEur(fac.pg3_eigenanteil || fac.pg2_eigenanteil)}/Mo` : '';
+    document.getElementById('enquirySubtitle').textContent = fac ? `${fac.city} \u00b7 Eigenanteil ab ${formatEur(fac.eigenanteil)}/Mo` : '';
     document.getElementById('enquiryForm').style.display = '';
     document.getElementById('enquirySuccess').style.display = 'none';
     document.getElementById('enquiryOverlay').classList.add('active');
@@ -2125,7 +2130,7 @@ function closeEnquiry() {
 }
 
 function submitEnquiry() {
-    if (document.getElementById('enqWebsite').value) return;
+    if (document.getElementById('enq_hp_check').value) return;
     const name = document.getElementById('enqName').value.trim();
     const email = document.getElementById('enqEmail').value.trim();
     if (!name || !email) {
@@ -2151,6 +2156,10 @@ function submitEnquiry() {
 
     trackEvent('enquiry_submit', data);
 
+    // Disable button while submitting
+    const submitBtn = document.querySelector('#enquiryOverlay .submit-btn');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Wird gesendet...'; }
+
     // Send lead via email
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -2168,11 +2177,19 @@ function submitEnquiry() {
             nachricht: data.message || 'Keine Nachricht',
         })
     }).then(r => r.json()).then(res => {
-        if (!res.success) console.error('Web3Forms error:', res);
-    }).catch(err => console.error('Web3Forms failed:', err));
-
-    document.getElementById('enquiryForm').style.display = 'none';
-    document.getElementById('enquirySuccess').style.display = '';
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Kostenlos anfragen'; }
+        if (res.success) {
+            document.getElementById('enquiryForm').style.display = 'none';
+            document.getElementById('enquirySuccess').style.display = '';
+        } else {
+            console.error('Web3Forms error:', res);
+            alert('Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+        }
+    }).catch(err => {
+        console.error('Web3Forms failed:', err);
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Kostenlos anfragen'; }
+        alert('Verbindungsfehler. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+    });
 
     document.getElementById('enqName').value = '';
     document.getElementById('enqEmail').value = '';
@@ -2294,7 +2311,7 @@ function quizBack(currentStep) {
 }
 
 function submitQuiz() {
-    if (document.getElementById('quizWebsite').value) return;
+    if (document.getElementById('quiz_hp_check').value) return;
     const name = document.getElementById('quizName').value.trim();
     const email = document.getElementById('quizEmail').value.trim();
     if (!name || !email) {
@@ -2313,6 +2330,10 @@ function submitQuiz() {
     localStorage.setItem('omasoase_quiz_leads', JSON.stringify(leads));
 
     trackEvent('quiz_submit', quizAnswers);
+
+    // Disable button while submitting
+    const quizBtn = document.querySelector('.quiz-next[onclick="submitQuiz()"]');
+    if (quizBtn) { quizBtn.disabled = true; quizBtn.textContent = 'Wird gesendet...'; }
 
     // Send lead via email
     fetch('https://api.web3forms.com/submit', {
@@ -2333,10 +2354,18 @@ function submitQuiz() {
             notizen: quizAnswers.notes || 'Keine',
         })
     }).then(r => r.json()).then(res => {
-        if (!res.success) console.error('Web3Forms error:', res);
-    }).catch(err => console.error('Web3Forms failed:', err));
-
-    showQuizStep('done');
+        if (quizBtn) { quizBtn.disabled = false; quizBtn.textContent = 'Empfehlung anfordern'; }
+        if (res.success) {
+            showQuizStep('done');
+        } else {
+            console.error('Web3Forms error:', res);
+            alert('Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+        }
+    }).catch(err => {
+        console.error('Web3Forms failed:', err);
+        if (quizBtn) { quizBtn.disabled = false; quizBtn.textContent = 'Empfehlung anfordern'; }
+        alert('Verbindungsfehler. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+    });
 }
 
 // Load data
@@ -2388,6 +2417,9 @@ fetch('data/stuttgart_final.csv')
              'distance_m','lat','lon','photo_count','google_rating','google_review_count'].forEach(k => {
                 obj[k] = parseFloat(obj[k]) || 0;
             });
+            // Parse eigenanteil_display (German format "3.033,15 €") into a float
+            const raw = (obj.eigenanteil_display || '').replace(/[^\d,]/g, '').replace(',', '.');
+            obj.eigenanteil = parseFloat(raw) || obj.pg3_eigenanteil || obj.pg2_eigenanteil || 0;
             obj.has_kurzzeitpflege = obj.has_kurzzeitpflege === 'True';
             obj.visiting_always = obj.visiting_always === 'True';
             const avail = (obj.web_verfuegbare_plaetze || '').toLowerCase();
