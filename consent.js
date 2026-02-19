@@ -23,18 +23,26 @@
 
     document.body.appendChild(banner);
 
+    // Push engagement banner up while cookie banner is visible
+    var beratung = document.getElementById('beratungBanner');
+    if (beratung) beratung.classList.add('consent-offset');
+
+    function dismissCookieBanner() {
+        banner.remove();
+        if (beratung) beratung.classList.remove('consent-offset');
+    }
+
     document.getElementById('consentAccept').onclick = function() {
         localStorage.setItem('omasoase_consent', 'all');
         window['ga-disable-G-FX9ZFMQSEM'] = false;
-        // Re-init GA4
         if (typeof gtag === 'function') {
             gtag('consent', 'update', { analytics_storage: 'granted' });
         }
-        banner.remove();
+        dismissCookieBanner();
     };
 
     document.getElementById('consentReject').onclick = function() {
         localStorage.setItem('omasoase_consent', 'essential');
-        banner.remove();
+        dismissCookieBanner();
     };
 })();
