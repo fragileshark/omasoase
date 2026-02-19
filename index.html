@@ -2183,12 +2183,12 @@ function submitEnquiry() {
             document.getElementById('enquirySuccess').style.display = '';
         } else {
             console.error('Web3Forms error:', res);
-            alert('Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+            alert('Web3Forms: ' + (res.message || JSON.stringify(res)));
         }
     }).catch(err => {
         console.error('Web3Forms failed:', err);
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Kostenlos anfragen'; }
-        alert('Verbindungsfehler. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+        alert('Netzwerkfehler: ' + err.message);
     });
 
     document.getElementById('enqName').value = '';
@@ -2359,12 +2359,12 @@ function submitQuiz() {
             showQuizStep('done');
         } else {
             console.error('Web3Forms error:', res);
-            alert('Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+            alert('Web3Forms: ' + (res.message || JSON.stringify(res)));
         }
     }).catch(err => {
         console.error('Web3Forms failed:', err);
         if (quizBtn) { quizBtn.disabled = false; quizBtn.textContent = 'Empfehlung anfordern'; }
-        alert('Verbindungsfehler. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@omasoase.de');
+        alert('Netzwerkfehler: ' + err.message);
     });
 }
 
